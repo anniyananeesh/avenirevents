@@ -1,0 +1,555 @@
+<?php
+if (!defined('BASEPATH'))
+    exit('No direct script access allowed');
+
+class Contents_management extends Admin_Controller
+{
+
+    /*
+    |--------------------------------------------------------------------------
+    | Configurations
+    |--------------------------------------------------------------------------
+    | Note: Functions like settings, getModuleInfo, getImageConfig, upload_image etc are
+    | defined in My Controller file located in /application/core.
+    |
+    */
+    protected $model_name = "model_contents_management";
+    public $image_up_path = CONTENTS_IMAGE_UP_PATH;
+    public $thumb_up_path = CONTENTS_THUMB_UP_PATH;
+    public $image_show_path = CONTENTS_IMAGE_PATH;
+    public $thumb_show_path = CONTENTS_THUMB_PATH;
+    public $search_field = "heading_en";
+    public $module_version = "1.0";
+    /*
+    |--------------------------------------------------------------------------
+    | Constructor
+    |--------------------------------------------------------------------------
+    */
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->load->model($this->config->item('admin_folder') . "/model_logs", 'modelAdminLogs');
+        $this->load->model($this->config->item('admin_folder') . "/" . $this->model_name, 'modelNameAlias');
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | Return All Records
+    |--------------------------------------------------------------------------
+    */
+    public function index()
+    {
+        $folder              = $this->getFolder();
+        $data["folder_name"] = $folder;
+        $data["module_name"] = $this->getModuleInfo()->module_name;
+        $data["page"]        = $folder . "/home";
+
+        $base_url .= HOST_URL . "/" . $folder . "/index";
+        $data_search         = $this->modelNameAlias->auto_complete_data_for_search();
+        $data["data_search"] = $data_search;
+
+        /* --------------------------
+        |	 Common Features in All Modules
+        ---------------------------*/
+        $common_array = $this->common_features();
+        $base_url .= $common_array["base_url"];
+        $sortby    = $common_array["sortby"];
+        $sortWith  = $common_array["sortWith"];
+        $sortImg   = $common_array["sortImg"];
+        $cmsg      = $common_array["msg"];
+        $cerr      = $common_array["err"];
+        $paging    = $common_array["paging"];
+        $filter_by = $common_array["filter_by"];
+        $searchBox = $common_array["searchBox"];
+        $urlparams = $common_array["urlparams"];
+        $by        = $common_array["by"];
+        $uri_array = $common_array["uri_array"];
+
+        $data["sortby"]            = $sortby;
+        $data["MSG"]               = $cmsg;
+        $data["Error"]             = $cerr;
+        $data["sort_" . $sortWith] = $sortImg;
+        $data["paging"]            = $paging;
+        $data["filter_by"]         = $filter_by;
+        $data["searchBox"]         = $searchBox;
+        $data["urlparams"]         = $urlparams;
+
+        $where_array["parent_id"] = 0;
+
+        if (!empty($searchBox))
+        {
+            $where_array[$this->search_field . " LIKE "] = $searchBox . "%";
+        }
+        if ($filter_by == "published")
+        {
+            $where_array["is_active"] = "Y";
+        }
+        if ($filter_by == "unpublished")
+        {
+            $where_array["is_active"] = "N";
+        }
+
+        /* --------------------------
+        |	 Pagination
+        ---------------------------*/
+        $this->load->library('pagination');
+        $offset = (array_key_exists('offset', $uri_array) ? trim($uri_array["offset"]) : 0);
+        $limit  = (!empty($paging) ? $paging : "20");
+        $base_url .= "/offset";
+        $total_records = $this->modelNameAlias->countTotal($where_array);
+        $uri_segments  = $this->uri->total_segments();
+        $config        = custom_pagination($limit, $total_records, $base_url, $uri_segments);
+        $this->pagination->initialize($config);
+        $data['links'] = $this->pagination->create_links();
+
+        /* --------------------------
+        |	 All Records List
+        ---------------------------*/
+        $where_array["is_active"] = "Y";
+        $data_list                = $this->modelNameAlias->get_all_records($where_array, $limit, $offset, $sortWith, $by);
+        $data["data_list"]        = $data_list;
+
+        $data["display_records"] = display_records($total_records, $offset, $paging);
+        $data["total_records"]   = $total_records;
+        $data['offset']          = $offset;
+        $data["paging"]          = $limit;
+        $data["image_show_path"] = $this->image_show_path;
+        $data["thumb_show_path"] = $this->thumb_show_path;
+        $this->load->view($this->config->item('admin_folder') . "/template", $data);
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | Return All Pages
+    |--------------------------------------------------------------------------
+    */
+    public function pages()
+    {
+        $folder              = $this->getFolder();
+        $data["folder_name"] = $folder;
+        $data["module_name"] = $this->getModuleInfo()->module_name;
+        $data["page"]        = $folder . "/pages";
+
+        $parent_id           = $this->uri->segment(3);
+        $parent_name         = $this->uri->segment(4);
+        $data["parent_id"]   = $parent_id;
+        $data["parent_name"] = $parent_name;
+
+        $base_url .= HOST_URL . "/" . $folder . "/pages/" . $parent_id . "/" . $parent_name;
+        $data_search         = $this->modelNameAlias->auto_complete_data_for_search();
+        $data["data_search"] = $data_search;
+
+        /* --------------------------
+        |	 Common Features in All Modules
+        ---------------------------*/
+        $uri_array    = $this->uri->uri_to_assoc(5);
+        $common_array = $this->common_features();
+        $base_url .= $common_array["base_url"];
+        $sortby    = $common_array["sortby"];
+        $sortWith  = $common_array["sortWith"];
+        $sortImg   = $common_array["sortImg"];
+        $cmsg      = $common_array["msg"];
+        $cerr      = $common_array["err"];
+        $paging    = $common_array["paging"];
+        $filter_by = $common_array["filter_by"];
+        $searchBox = $common_array["searchBox"];
+        $urlparams = $common_array["urlparams"];
+        $by        = $common_array["by"];
+        $uri_array = $common_array["uri_array"];
+
+        $data["sortby"]            = $sortby;
+        $data["MSG"]               = $cmsg;
+        $data["Error"]             = $cerr;
+        $data["sort_" . $sortWith] = $sortImg;
+        $data["paging"]            = $paging;
+        $data["filter_by"]         = $filter_by;
+        $data["searchBox"]         = $searchBox;
+        $data["urlparams"]         = $urlparams;
+
+        if ($this->uri->segment(5) == "a")
+        {
+            $data["MSG"] = "Record has been inserted successfully!";
+        }
+        else if ($this->uri->segment(5) == "e")
+        {
+            $data["MSG"] = "Record has been updated successfully!";
+        }
+        else if ($this->uri->segment(5) == "d")
+        {
+            $data["MSG"] = $this->uri->segment(6) . " Records deleted successfully!";
+        }
+
+        if (!empty($parent_id))
+        {
+            $where_array["parent_id"] = $parent_id;
+        }
+        if (!empty($searchBox))
+        {
+            $where_array[$this->search_field . " LIKE "] = $searchBox . "%";
+        }
+        if ($filter_by == "published")
+        {
+            $where_array["is_active"] = "Y";
+        }
+        if ($filter_by == "unpublished")
+        {
+            $where_array["is_active"] = "N";
+        }
+
+        /* --------------------------
+        |	 Pagination
+        ---------------------------*/
+        $this->load->library('pagination');
+        $offset = (array_key_exists('offset', $uri_array) ? trim($uri_array["offset"]) : 0);
+        $limit  = (!empty($paging) ? $paging : "20");
+        $base_url .= "/offset";
+        $total_records = $this->modelNameAlias->countTotal($where_array);
+        $uri_segments  = $this->uri->total_segments();
+        $config        = custom_pagination($limit, $total_records, $base_url, $uri_segments);
+        $this->pagination->initialize($config);
+        $data['links'] = $this->pagination->create_links();
+
+        /* --------------------------
+        |	 All Records List
+        ---------------------------*/
+        $data_list         = $this->modelNameAlias->get_all_records($where_array, $limit, $offset, $sortWith, $by);
+        $data["data_list"] = $data_list;
+
+        $data["display_records"] = display_records($total_records, $offset, $paging);
+        $data["total_records"]   = $total_records;
+        $data['offset']          = $offset;
+        $data["paging"]          = $limit;
+        $data["image_show_path"] = $this->image_show_path;
+        $data["thumb_show_path"] = $this->thumb_show_path;
+        $this->load->view($this->config->item('admin_folder') . "/template", $data);
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | Add Record
+    |--------------------------------------------------------------------------
+    */
+    public function add()
+    {
+        $folder              = $this->getFolder();
+        $data["folder_name"] = $folder;
+        $data["module_name"] = $this->getModuleInfo()->module_name;
+        $data["page"]        = $folder . "/add";
+
+        $parent_id           = $this->uri->segment(3);
+        $parent_name         = $this->uri->segment(4);
+        $data["parent_id"]   = $parent_id;
+        $data["parent_name"] = $parent_name;
+
+        if (isset($_POST) && count($_POST) != 0)
+        {
+            $heading_en = $this->input->post("heading_en", TRUE);
+            $heading_ar = $this->input->post("heading_ar", TRUE);
+            $heading_fr = $this->input->post("heading_fr", TRUE);
+
+            $description_sm_en    = $this->input->post("description_sm_en", FALSE);
+            $description_sm_ar = $this->input->post("description_sm_ar", FALSE);
+            $description_sm_fr = $this->input->post("description_sm_fr", FALSE);
+
+            $description_en = $this->input->post("description_en", FALSE);
+            $description_ar = $this->input->post("description_ar", FALSE);
+            $description_fr = $this->input->post("description_fr", FALSE);
+
+            $website_title    = $this->input->post("website_title", TRUE);
+            $meta_keywords    = $this->input->post("meta_keywords", TRUE);
+            $meta_description = $this->input->post("meta_description", TRUE);
+
+            $parent_id       = $this->input->post("parent_id", TRUE);
+            $is_active       = $this->input->post("is_active", TRUE);
+            $image1_name     = $_FILES["image1"]["name"];
+            $image1_tmp_name = $_FILES["image1"]["tmp_name"];
+
+            $is_exist_array = array(
+                'heading_en' => $heading_en
+            );
+            if ($this->modelNameAlias->isExist($is_exist_array) == FALSE)
+            {
+
+                if (!empty($image1_name))
+                {
+                    $upload_array  = $this->upload_image('image1', $image1_name);
+                    $Image1Name    = $upload_array["ImageName"];
+                    $data["MSG"]   = $upload_array["msg"];
+                    $data["Error"] = $upload_array["err"];
+                    $uploadstatus  = $upload_array["ups"];
+                }
+
+                if ($uploadstatus != "Error")
+                {
+                    $orderbyID      = $this->modelNameAlias->lastOrderID();
+                    $data_array     = array(
+                        "heading_en" => mysql_real_escape_string($heading_en),
+                        "heading_ar" => mysql_real_escape_string($heading_ar),
+                        "heading_fr" => mysql_real_escape_string($heading_fr),
+                        "description_sm_en" => addslashes($description_sm_en),
+                        "description_sm_ar" => addslashes($description_sm_ar),
+                        "description_sm_fr" => addslashes($description_sm_fr),
+                        "description_en" => addslashes($description_en),
+                        "description_ar" => addslashes($description_ar),
+                        "description_fr" => addslashes($description_fr),
+                        "website_title" => addslashes($website_title),
+                        "meta_keywords" => addslashes($meta_keywords),
+                        "meta_description" => addslashes($meta_description),
+                        "parent_id" => mysql_real_escape_string($parent_id),
+                        "image1" => mysql_real_escape_string($Image1Name),
+                        "orderby" => mysql_real_escape_string($orderbyID->orderby + 1),
+                        "can_delete" => "Y",
+                        "is_active" => mysql_real_escape_string($is_active),
+                        "added_date" => date("Y-m-d H:i:s")
+                    );
+                    $last_insert_id = $this->modelNameAlias->insertRecord($data_array);
+                    $logData        = getLogDetails($this->getModuleInfo()->module_name, $last_insert_id);
+                    $this->modelAdminLogs->insertLog($logData["insertDesc"]);
+                    $data["MSG"] = "Record has been inserted successfully!";
+                }
+            }
+            else
+            {
+                $data["Error"] = "Y";
+                $data["MSG"]   = "Record already exists!";
+            }
+
+            if ($data["Error"] == "Y")
+            {
+                $data["heading_en"]        = $heading_en;
+                $data["heading_ar"]        = $heading_ar;
+                $data["heading_fr"]        = $heading_fr;
+                $data["description_sm_en"]    = $description_sm_en;
+                $data["description_sm_ar"] = $description_sm_ar;
+                $data["description_sm_fr"] = $description_sm_fr;
+                $data["description_en"]    = $description_en;
+                $data["description_ar"]    = $description_ar;
+                $data["description_fr"]    = $description_fr;
+                $data["website_title"]     = $website_title;
+                $data["meta_keywords"]     = $meta_keywords;
+                $data["meta_description"]  = $meta_description;
+                $data["is_active"]         = $is_active;
+            }
+            if (!isset($data["Error"]) && $_POST["submit"] == "Save & Close")
+            {
+                redirect(HOST_URL . "/" . $folder . "/pages/" . $parent_id . "/" . $parent_name . "/a");
+            }
+        }
+
+        $this->load->view($this->config->item('admin_folder') . "/template", $data);
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | Edit Record
+    |--------------------------------------------------------------------------
+    */
+    public function edit()
+    {
+        $folder              = $this->getFolder();
+        $data["folder_name"] = $folder;
+        $data["module_name"] = $this->getModuleInfo()->module_name;
+        $data["page"]        = $folder . "/edit";
+
+        $record_id           = $this->uri->segment(3);
+        $data_record         = $this->modelNameAlias->get_details($record_id);
+        $data["data_record"] = $data_record;
+
+        $parent_id           = $this->uri->segment(4);
+        $parent_name         = $this->uri->segment(5);
+        $data["parent_id"]   = $parent_id;
+        $data["parent_name"] = $parent_name;
+
+        if ($this->input->post("delete_file") == "Y")
+        {
+            $file_name  = $this->input->post("file_name", TRUE);
+            $field_name = $this->input->post("field_name", TRUE);
+            if (!empty($file_name))
+            {
+                if (file_exists($this->thumb_up_path . $file_name))
+                {
+                    unlink($this->thumb_up_path . $file_name);
+                }
+                if (file_exists($this->image_up_path . $file_name))
+                {
+                    unlink($this->image_up_path . $file_name);
+                }
+                $data_array = array(
+                    $field_name => ''
+                );
+                $this->modelNameAlias->updateRecord($data_array, $record_id);
+                $data["MSG"] = "Selected File has been deleted successfully.";
+
+                $data_record         = $this->modelNameAlias->get_details($record_id);
+                $data["data_record"] = $data_record;
+            }
+        }
+
+        if ($this->input->post("btnsubmit") == "Save & Close")
+        {
+            $heading_en = $this->input->post("heading_en", TRUE);
+            $heading_ar = $this->input->post("heading_ar", TRUE);
+            $heading_fr = $this->input->post("heading_fr", TRUE);
+
+            $description_sm_en    = $this->input->post("description_sm_en", FALSE);
+            $description_sm_ar = $this->input->post("description_sm_ar", FALSE);
+            $description_sm_fr = $this->input->post("description_sm_fr", FALSE);
+
+            $description_en = $this->input->post("description_en", FALSE);
+            $description_ar = $this->input->post("description_ar", FALSE);
+            $description_fr = $this->input->post("description_fr", FALSE);
+            $is_active      = $this->input->post("is_active", TRUE);
+
+            $website_title    = $this->input->post("website_title", TRUE);
+            $meta_keywords    = $this->input->post("meta_keywords", TRUE);
+            $meta_description = $this->input->post("meta_description", TRUE);
+
+            $image1_name     = $_FILES["image1"]["name"];
+            $image1_tmp_name = $_FILES["image1"]["tmp_name"];
+
+            $is_exist_array = array(
+                'heading_en' => $heading_en,
+                'id !=' => $record_id
+            );
+
+            if (!empty($image1_name))
+            {
+                $upload_array  = $this->upload_image('image1', $image1_name, $data_record->image1);
+                $Image1Name    = $upload_array["ImageName"];
+                $data["MSG"]   = $upload_array["msg"];
+                $data["Error"] = $upload_array["err"];
+                $uploadstatus  = $upload_array["ups"];
+            }
+            else
+            {
+                $Image1Name = $data_record->image1;
+            }
+
+            if ($uploadstatus != "Error")
+            {
+                $data_array = array(
+                    "heading_en" => mysql_real_escape_string($heading_en),
+                    "heading_ar" => mysql_real_escape_string($heading_ar),
+                    "heading_fr" => mysql_real_escape_string($heading_fr),
+                    "description_sm_en" => addslashes($description_sm_en),
+                    "description_sm_ar" => addslashes($description_sm_ar),
+                    "description_sm_fr" => addslashes($description_sm_fr),
+                    "description_en" => addslashes($description_en),
+                    "description_ar" => addslashes($description_ar),
+                    "description_fr" => addslashes($description_fr),
+                    "website_title" => addslashes($website_title),
+                    "meta_keywords" => addslashes($meta_keywords),
+                    "meta_description" => addslashes($meta_description),
+                    "image1" => mysql_real_escape_string($Image1Name),
+                    "is_active" => mysql_real_escape_string($is_active)
+                );
+                $this->modelNameAlias->updateRecord($data_array, $record_id);
+                $logData = getLogDetails($this->getModuleInfo()->module_name, $record_id);
+                $this->modelAdminLogs->insertLog($logData["editDesc"]);
+                $data["MSG"] = "Record has been updated successfully!";
+            }
+
+            redirect(HOST_URL . "/" . $folder . "/pages/" . $parent_id . "/" . $parent_name . "/e");
+        }
+
+        $data["heading_en"]        = stripslashes($data_record->heading_en);
+        $data["heading_ar"]        = stripslashes($data_record->heading_ar);
+        $data["heading_fr"]        = stripslashes($data_record->heading_fr);
+        $data["description_sm_en"]    = stripslashes($data_record->description_sm_en);
+        $data["description_sm_ar"] = stripslashes($data_record->description_sm_ar);
+        $data["description_sm_fr"] = stripslashes($data_record->description_sm_fr);
+        $data["description_en"]    = stripslashes($data_record->description_en);
+        $data["description_ar"]    = stripslashes($data_record->description_ar);
+        $data["description_fr"]    = stripslashes($data_record->description_fr);
+        $data["comments"]          = stripslashes($data_record->comments);
+        $data["website_title"]     = stripslashes($data_record->website_title);
+        $data["meta_keywords"]     = stripslashes($data_record->meta_keywords);
+        $data["meta_description"]  = stripslashes($data_record->meta_description);
+        $data["is_active"]         = stripslashes($data_record->is_active);
+
+        $this->load->view($this->config->item("admin_folder") . "/template", $data);
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | Return Record Details
+    |--------------------------------------------------------------------------
+    */
+    public function view()
+    {
+        $folder              = $this->getFolder();
+        $data["folder_name"] = $folder;
+        $data["module_name"] = $this->getModuleInfo()->module_name;
+        $data["page"]        = $folder . "/view";
+
+        $record_id           = $this->uri->segment(3);
+        $data_record         = $this->modelNameAlias->get_details($record_id);
+        $data["data_record"] = $data_record;
+
+        $parent_id           = $this->uri->segment(4);
+        $parent_name         = $this->uri->segment(5);
+        $data["parent_id"]   = $parent_id;
+        $data["parent_name"] = $parent_name;
+
+        $this->load->view($this->config->item("admin_folder") . "/template", $data);
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | Delete Record
+    |--------------------------------------------------------------------------
+    */
+    public function delete()
+    {
+        $folder              = $this->getFolder();
+        $data["folder_name"] = $folder;
+        $data["module_name"] = $this->getModuleInfo()->module_name;
+        $data["page"]        = $folder . "/delete";
+
+        $record_id = $this->uri->segment(3);
+        if (!empty($record_id) and $record_id != '-')
+        {
+            $data_list         = $this->modelNameAlias->get_one_record_for_delete($record_id);
+            $data["data_list"] = $data_list;
+        }
+        else
+        {
+            $id_array          = $_POST['EditBox'];
+            $data_list         = $this->modelNameAlias->get_all_records_for_delete($id_array);
+            $data["data_list"] = $data_list;
+        }
+
+        $parent_id           = $this->uri->segment(4);
+        $parent_name         = $this->uri->segment(5);
+        $data["parent_id"]   = $parent_id;
+        $data["parent_name"] = $parent_name;
+
+        $data["Error"] = "Y";
+        $data["MSG"]   = "Are you sure you want to delete the Record?";
+
+        if ($this->input->post("btnsubmit") == "Delete")
+        {
+            $EditBox = $_POST["EditBox"];
+            for ($j = 0; $j < count($EditBox); $j++)
+            {
+                $data_record = $this->modelNameAlias->get_details($EditBox[$j]);
+                $image_name  = stripslashes($data_record->image1);
+                if (!empty($image_name))
+                {
+                    if (file_exists($this->thumb_up_path . $image_name))
+                    {
+                        unlink($this->thumb_up_path . $image_name);
+                    }
+                    if (file_exists($this->image_up_path . $image_name))
+                    {
+                        unlink($this->image_up_path . $image_name);
+                    }
+                }
+                $this->modelNameAlias->deleteRecord($EditBox[$j]);
+                $logData = getLogDetails($this->getModuleInfo()->module_name, $EditBox[$j]);
+                $this->modelAdminLogs->insertLog($logData["deleteDesc"]);
+            }
+
+            redirect(HOST_URL . "/" . $folder . "/pages/" . $parent_id . "/" . $parent_name . "/d/" . count($EditBox));
+        }
+
+        $this->load->view($this->config->item("admin_folder") . "/template", $data);
+    }
+
+
+}
