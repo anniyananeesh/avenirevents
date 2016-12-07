@@ -115,4 +115,11 @@
     $lang['auto.prop_stylist']					  = "Prop Stylist";
     $lang['auto.wardrobe']					  = "Wardrob";
 
+    $lang['auto.upcoming_events']  = "Upcomming Events";
+
+    $lang['auto.auction_title'] = "Auction Organising";
+    $lang['auto.casting'] = "Casting";
+    $lang['auto.conference_header'] = "Conference & Seminars";
+    $lang['auto.service_subtitle'] = "Send your details and one of our executive will get back to you";
+
 ?>

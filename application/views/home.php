@@ -81,89 +81,93 @@
   </section>
 
   <div class="clearfix"></div>
- <section id="service">
 
- <div class="service">
 
-    <div class="sevicehead">
-      <h1><?php echo lang("auto.our_services")?></h1>
-      <p><?php echo lang("auto.we_combine_experience")?></p>
-    </div>
+	<section id="service">
 
-    <div class="clearfix"></div>
+  <div class="service">
 
-      <div class="left_colmn ">
-          <div class="img-container model">
-            <div class="img-back"><img src="<?php echo IMG_PATH?>/assets/model.jpg" class="img-responsive" /></div>
-            <h2 class="homeImageLink"> <span><?php echo lang("auto.models")?></span> </h2>
-          </div>
-      </div>
+     <div class="sevicehead">
+			 <h1><?php echo lang("auto.our_services")?></h1>
+       <p><?php echo lang("auto.we_combine_experience")?></p>
+     </div>
 
-      <div class="md_colmn">
-        <div class="img-container medium">
-          <div class="img-back"><img src="<?php echo IMG_PATH?>/assets/photographer.jpg"  /></div>
-          <h2 class="homeImageLink"> <span><?php echo lang("auto.photographers")?></span> </h2>
-        </div>
-        <div class="img-container small">
-          <div class="img-back"><img src="<?php echo IMG_PATH?>/assets/stylist.jpg" class="img-responsive" /></div>
-          <h2 class="homeImageLink"> <span><?php echo lang("auto.stylist")?></span> </h2>
-        </div>
-        <div class="img-container small">
-          <div class="img-back"><img src="<?php echo IMG_PATH?>/assets/cast.jpg" class="img-responsive" /></div>
-          <h2 class="homeImageLink"> <span><?php echo lang("auto.cast")?></span> </h2>
-        </div>
-        <div class="img-container medium">
-          <div class="img-back"><img src="<?php echo IMG_PATH?>/assets/entertainer.jpg" class="img-responsive" /></div>
-          <h2 class="homeImageLink"> <span><?php echo lang("auto.entertainers")?></span> </h2>
-        </div>
-        <div class="clearfix"></div>
-        <div class=" col-lg-12 service_sub_head text-center">
-          <h1><?php echo lang("auto.event_support")?></h1>
-        </div>
-        <div class="img-container small_bottom">
-          <div class="img-back_reverse"><img src="<?php echo IMG_PATH?>/assets/conferance.jpg" class="img-responsive" /></div>
-          <h2 class="homeImageLink"> <span><?php echo lang("auto.conference_seminars")?></span> </h2>
-        </div>
-        <div class="img-container small_bottom">
-          <div class="img-back_reverse"><img src="<?php echo IMG_PATH?>/assets/auction.jpg" class="img-responsive" /></div>
-          <h2 class="homeImageLink"> <span><?php echo lang("auto.auction_organizing")?></span> </h2>
-        </div>
-        <div class="img-container small_bottom">
-          <div class="img-back_reverse"><img src="<?php echo IMG_PATH?>/assets/party.jpg" class="img-responsive" /></div>
-          <h2 class="homeImageLink"> <span><?php echo lang("auto.parties")?> </span> </h2>
-        </div>
-        <div class="clearfix"></div>
-      </div>
+     <div class="clearfix"></div>
 
-     <div class="right_colmn">
-        <div class=" service_sub_head_vertical text-center">
-          <h1><?php echo lang("auto.promotions")?></h1>
-        </div>
+         <div class="left_colmn ">
+           <div class="img-container model">
+             <a href="model_reg.html"> <div class="img-back"><img src="<?php echo IMG_PATH?>/assets/model.jpg" class="img-responsive" /></div>
+             <h2 class="homeImageLink"> <span><?php echo lang("auto.models")?></span> </h2></a>
+           </div>
+         </div>
 
-        <div class="right_colmn-img">
-              <div class="img-container model2">
-                <div class="img-back_reverse"><img src="<?php echo IMG_PATH?>/assets/hostess.jpg" class="img-responsive" /></div>
-                <h2 class="homeImageLink"> <span><?php echo lang("auto.hostess")?> </span> </h2>
-              </div>
 
-              <div class="img-container model2">
-                <div class="img-back_reverse"><img src="<?php echo IMG_PATH?>/assets/promoters.jpg" class="img-responsive" /></div>
-                <h2 class="homeImageLink"> <span><?php echo lang("auto.promoters")?> </span> </h2>
-              </div>
 
-              <div class="img-container model2">
-                <div class="img-back_reverse"><img src="<?php echo IMG_PATH?>/assets/exhibition.jpg" class="img-responsive" /></div>
-                <h2 class="homeImageLink"> <span><?php echo lang("auto.exhibitions")?> </span> </h2>
-              </div>
-              <div class="clearfix"></div>
-        </div>
-        <div class="clearfix"></div>
-    </div>
+       <div class="md_colmn">
+         <div class="img-container medium">
+           <a href="photographer_reg.html"> <div class="img-back3"><img src="<?php echo IMG_PATH?>/assets/photographer.jpg"  /></div>
+           <h2 class="homeImageLink"> <span><?php echo lang("auto.photographers")?></span> </h2></a>
+         </div>
+         <div class="img-container small">
+          <a href="stylist_reg.html"> <div class="img-back2"><img src="<?php echo IMG_PATH?>/assets/stylist.jpg" class="img-responsive" /></div>
+           <h2 class="homeImageLink"> <span><?php echo lang("auto.stylist")?></span> </h2></a>
+         </div>
+         <div class="img-container small">
+          <a href="<?php echo HOST_URL?>/<?php echo $lan?>/services/casting">  <div class="img-back"><img src="<?php echo IMG_PATH?>/assets/cast.jpg" class="img-responsive" /></div>
+           <h2 class="homeImageLink"> <span><?php echo lang("auto.cast")?></span> </h2></a>
+         </div>
+         <div class="img-container medium">
+          <a href="entertainer_reg.html">  <div class="img-back4"><img src="<?php echo IMG_PATH?>/assets/entertainer.jpg" class="img-responsive" /></div>
+           <h2 class="homeImageLink"> <span><?php echo lang("auto.entertainers")?></span> </h2></a>
+         </div>
+         <div class="clearfix"></div>
+         <div class=" col-lg-12 service_sub_head text-center">
+           <h1><?php echo lang("auto.event_support")?></h1>
+         </div>
+         <div class="img-container small_bottom">
+          <a href="<?php echo HOST_URL?>/<?php echo $lan?>/services/conference">  <div class="img-back2"><img src="<?php echo IMG_PATH?>/assets/conferance.jpg" class="img-responsive" /></div>
+           <h2 class="homeImageLink"> <span><?php echo lang("auto.conference_seminars")?></span> </h2></a>
+         </div>
+         <div class="img-container small_bottom">
+          <a href="<?php echo HOST_URL?>/<?php echo $lan?>/services/auction">  <div class="img-back"><img src="<?php echo IMG_PATH?>/assets/auction.jpg" class="img-responsive" /></div>
+           <h2 class="homeImageLink"> <span><?php echo lang("auto.auction_organizing")?></span> </h2></a>
+         </div>
+         <div class="img-container small_bottom">
+         <a href="<?php echo HOST_URL?>/<?php echo $lan?>/services/parties">   <div class="img-back4"><img src="<?php echo IMG_PATH?>/assets/party.jpg" class="img-responsive" /></div>
+           <h2 class="homeImageLink"> <span><?php echo lang("auto.parties")?> </span> </h2></a>
+         </div>
+         <div class="clearfix"></div>
+       </div>
 
- <div class="clearfix"></div>
+      <div class="right_colmn">
+         <div class=" service_sub_head_vertical text-center">
+           <h1><?php echo lang("auto.promotions")?></h1>
+         </div>
 
- </div>
-</section>
+         <div class="right_colmn-img">
+               <div class="img-container model2">
+                <a href="hostess_reg.html">  <div class="img-back"><img src="<?php echo IMG_PATH?>/assets/hostess.jpg" class="img-responsive" /></div>
+                 <h2 class="homeImageLink"> <span><?php echo lang("auto.hostess")?> </span> </h2></a>
+               </div>
+
+               <div class="img-container model2">
+                 <a href="promoter_reg.html"><div class="img-back4"><img src="<?php echo IMG_PATH?>/assets/promoters.jpg" class="img-responsive" /></div>
+                 <h2 class="homeImageLink"> <span><?php echo lang("auto.promoters")?> </span> </h2></a>
+               </div>
+
+               <div class="img-container model2">
+                <a href="<?php echo HOST_URL?>/<?php echo $lan?>/services/exhibitions"> <div class="img-back3"><img src="<?php echo IMG_PATH?>/assets/exhibition.jpg" class="img-responsive" /></div>
+                 <h2 class="homeImageLink"> <span><?php echo lang("auto.exhibitions")?> </span> </h2></a>
+               </div>
+               <div class="clearfix"></div>
+         </div>
+         <div class="clearfix"></div>
+     </div>
+
+  <div class="clearfix"></div>
+
+  </div>
+ </section>
 
 <section id="portfolio">
 <a name="work"></a>
@@ -267,12 +271,9 @@
 
         <div class="testimonial">
 
-        	<h1><?php echo lang("auto.clients_review")?></h1>
-            <p><?php echo lang("auto.our_strength_our_clients")?></p>
+        	<h1><?php echo lang("auto.upcoming_events")?></h1>
 
-
-            <div id="carousel-example-generic" class="container text-center carousel slide" data-ride="carousel">
-
+           <div id="carousel-example-generic" class="container text-center carousel slide" data-ride="carousel">
 
 						<div class="carousel-inner" role="listbox">
 
@@ -286,9 +287,10 @@
 									<div class="item <?php echo ($bkey == 0) ? 'active' : '';?>">
 										<div class="col-lg-12">
 		                 <img src="<?php echo $image_path?>" alt="">
-		                  <p class="testcontent"><span>"</span> <?php echo strip_tags(stripslashes($bvalue->{description_.$lan}));?><span>"</span></p>
-											<h2><?php echo $bvalue->{heading_.$lan};?></h2>
-											<h3><?php echo $bvalue->{designation_.$lan};?></h3>
+										 <h1> Dubai fashion Week </h1>
+										 <p class="testcontent"><span>"</span> Cras nunc nisi, sagittis et nibh in, feugiat dapibus quam. Ut pellentesque dictum massa, pellentesque aliquet nisi aliquam in. Maecenas non sollicitudin dui. <span>"</span></p>
+										 <h2>Dubai Mall, Dubai</h2>
+										 <h3>Dec 12 - Dec 20</h3>
 										</div>
 
 									</div>
@@ -297,13 +299,13 @@
 
 						</div>
 
-                   </div>
-
+	   			</div>
 
         <div class="clearfix"></div>
-        </div>
-</section>
 
+     </div>
+
+</section>
 
 	<div class="map">
     	<iframe src="<?php echo $data_title->gmap_iframe?>" width="100%" height="450px"  frameborder="0" style="border:0" allowfullscreen></iframe>

@@ -40,18 +40,18 @@
 			<div class="list">
 				<?php
 					foreach($data_list as $key=>$value){
-						
-						if (!isset($is_featured)){ $is_featured= "";} 
+
+						if (!isset($is_featured)){ $is_featured= "";}
 						$image1_name  = $value->image1;
 						$is_active    = $value->is_active;
 						$is_featured  = $value->is_featured;
 						$featured_img = (($is_featured=="Y")? '<img src="'.ADMIN_IMG_PATH.'/featured.png" alt="Featured">' : '');
-						$status_img   = (($is_active=="Y")?   '<img src="'.ADMIN_IMG_PATH.'/publish.png" alt="Publish">' : 
+						$status_img   = (($is_active=="Y")?   '<img src="'.ADMIN_IMG_PATH.'/publish.png" alt="Publish">' :
 																		  '<img src="'.ADMIN_IMG_PATH.'/unpublish.png" alt="Unpublish">');
-						
-						$image_path   = (!empty($image1_name) ? $this->thumb_show_path.'/'.$image1_name : ADMIN_IMG_PATH."/no_admin_image.png");						
+
+						$image_path   = (!empty($image1_name) ? $this->thumb_show_path.'/'.$image1_name : ADMIN_IMG_PATH."/no_admin_image.png");
 						$bgClass = (($bgClass=="bgcolor1") ? "bgcolor2" : "bgcolor1");
-						
+
 				?>
 				<div class="listitem selected <?=$bgClass?>">
 				<table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -81,7 +81,7 @@
 		</div>
 	</div>
 	<? echo form_close(); ?>
-</div>	
+</div>
 <script src="<?=JS_PATH?>/admin_validation.js"></script>
 <script language="javascript">
 	$('#btndelete').click(function(){
@@ -93,10 +93,10 @@
 			DeleteRecord();
 		}
 	});
-	
+
 	function DeleteRecord(){
 		document.frmListing.action="<?=HOST_URL?>/<?=$folder_name?>/delete";
 		document.frmListing.submit();
 	}
-	
+
 </script>

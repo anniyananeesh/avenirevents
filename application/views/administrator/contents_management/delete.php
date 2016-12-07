@@ -26,8 +26,7 @@
 						<td width="10" align="center" valign="middle">&nbsp;</td>
 						<td align="left" valign="middle"><table width="100%" border="0" cellspacing="0" cellpadding="0">
 						<tr>
-							<td align="left" valign="middle">Page Name (English)</td>
-                            <td align="left" valign="middle">Page Name (Arabic)</td>
+							<td align="left" valign="middle">Page Name</td>
 						</tr>
 						</table></td>
 						<td width="60" align="center" valign="middle">Image</td>
@@ -43,18 +42,18 @@
 			<div class="list">
 				<?php
 					foreach($data_list as $key=>$value){
-						
-						if (!isset($is_featured)){ $is_featured= "";} 
+
+						if (!isset($is_featured)){ $is_featured= "";}
 						$image1_name  = $value->image1;
 						$is_active    = $value->is_active;
 						$is_featured  = $value->is_featured;
 						$featured_img = (($is_featured=="Y")? '<img src="'.ADMIN_IMG_PATH.'/featured.png" alt="Featured">' : '');
-						$status_img   = (($is_active=="Y")?   '<img src="'.ADMIN_IMG_PATH.'/publish.png" alt="Publish">' : 
+						$status_img   = (($is_active=="Y")?   '<img src="'.ADMIN_IMG_PATH.'/publish.png" alt="Publish">' :
 																		  '<img src="'.ADMIN_IMG_PATH.'/unpublish.png" alt="Unpublish">');
-						
-						$image_path   = (!empty($image1_name) ? $this->thumb_show_path.'/'.$image1_name : ADMIN_IMG_PATH."/no_admin_image.png");						
+
+						$image_path   = (!empty($image1_name) ? $this->thumb_show_path.'/'.$image1_name : ADMIN_IMG_PATH."/no_admin_image.png");
 						$bgClass = (($bgClass=="bgcolor1") ? "bgcolor2" : "bgcolor1");
-						
+
 				?>
 				<div class="listitem selected <?=$bgClass?>">
 				<table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -63,8 +62,7 @@
 						<td width="10" align="left" valign="middle">&nbsp;</td>
 						<td align="left" valign="middle"><table width="100%" border="0" cellspacing="0" cellpadding="0">
 							<tr>
-								<td width="50%" align="left" valign="middle"><? echo $value->heading_en; ?></td>
-                                <td align="left" valign="middle"><? echo $value->heading_ar; ?></td>
+								<td width="50%" align="left" valign="middle"><? echo $value->heading_en; ?></td> 
 							</tr>
 						</table></td>
 						<td width="60" align="center" valign="middle"><img src="<?=$image_path?>" width="35" class="thumb" border="0" /></td>
@@ -86,5 +84,5 @@
 	</div>
 	<? echo form_hidden('is_order', ''); ?>
 	<? echo form_close(); ?>
-</div>	
+</div>
 <script src="<?=JS_PATH?>/admin_validation.js"></script>

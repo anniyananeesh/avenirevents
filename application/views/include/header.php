@@ -46,19 +46,17 @@
     }
 ?>
 
-<!DOCTYPE html>
-<html dir="<?php echo $direction?>">
+<!doctype html>
+<html>
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="author" content="digitallgateweb.com" />
 <title><? echo stripslashes($website_title); ?> <?php echo $page_title; ?></title>
-
-<meta name="keywords" content="<?php echo stripslashes($meta_keywords); ?>" />
-<meta name="description" content="<?php echo stripslashes($meta_description); ?>" />
-
-<link href="<?php echo IMG_PATH?>/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-<link rel="stylesheet" href="<?php echo CSS_PATH?>/assets/style_<?php echo $lan?>.css">
+<link rel="stylesheet" href="<?php echo CSS_PATH?>/assets/style.css">
+<!-- Bootstrap  -->
 <link rel="stylesheet" href="<?php echo CSS_PATH?>/assets/bootstrap.min.css">
 <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 <link rel="stylesheet" href="<?php echo CSS_PATH?>/assets/responsive-tabs.css">
@@ -117,68 +115,55 @@
     		 </ul>
              </lI>
 
-             <li>
-             <ul class="res_lang">
-                    <h4><?php echo lang("auto.select_language")?></h4>
-                    <li><a href="<?php echo HOST_URL?>/ar"><img src="<?php echo IMG_PATH?>/assets/lang1.png"></a></li>
-                    <li><a href="<?php echo HOST_URL?>/en"><img src="<?php echo IMG_PATH?>/assets/lang2.png"></a></li>
-                    <!--<li><a href="<?php //echo HOST_URL?>/fr"><img src="<?php //echo IMG_PATH?>/assets/lang3.png"></a></li> -->
-             </ul>
-             </li>
           </ul>
         </div>
 
-  <div class="container-fluid">
+        <div class="container">
 
-    <div class="row">
-    	<a href="<?php echo HOST_URL?>/<?php echo $lan?>/">
-      	<div class="logo <?php echo ($lan == 'ar') ? 'pull-right' : 'pull-left';?>"></div>
-      </a>
-      <nav class="<?php echo ($lan == 'ar') ? 'pull-left' : 'pull-right';?>">
-        <div class="top_nav">
-          <ul>
-            <LI><a href="<?php echo HOST_URL?>/<?php echo $lan?>/register"><?php echo lang("auto.register_with_us")?></a></LI>
-            <!-- <li>i</li>
-            <li><a href="<?php echo HOST_URL?>/<?php echo $lan?>/login"><?php echo lang("auto.login")?></a></li>-->
-          </ul>
-          <ul>
-            <?php if (!empty($data_title->facebook)):?>
-                <li><a href="<?php echo prep_url($data_title->facebook); ?>" target="_blank"><img src="<?php echo IMG_PATH?>/assets/social1.png"/></a></li>
-            <?php endif;?>
+          <div class="row">
+          	<a href="<?php echo HOST_URL?>/<?php echo $lan?>/">
+            	<div class="logo pull-left"></div>
+            </a>
+            <nav class="pull-right">
+              <div class="top_nav">
 
-            <?php if (!empty($data_title->twitter)):?>
-                <li><a href="<?php echo prep_url($data_title->twitter); ?>" target="_blank"><img src="<?php echo IMG_PATH?>/assets/social2.png"/></a></li>
-            <?php endif;?>
+                <ul>
+                  <?php if (!empty($data_title->facebook)):?>
+                      <li><a href="<?php echo prep_url($data_title->facebook); ?>" target="_blank"><img src="<?php echo IMG_PATH?>/assets/social1.png"/></a></li>
+                  <?php endif;?>
 
-            <?php if (!empty($data_title->instagram)):?>
-                <li><a href="<?php echo prep_url($data_title->instagram); ?>" target="_blank"><img src="<?php echo IMG_PATH?>/assets/social3.png"/></a></li>
-            <?php endif;?>
+                  <?php if (!empty($data_title->twitter)):?>
+                      <li><a href="<?php echo prep_url($data_title->twitter); ?>" target="_blank"><img src="<?php echo IMG_PATH?>/assets/social2.png"/></a></li>
+                  <?php endif;?>
 
-            <?php if (!empty($data_title->pinterest)):?>
-                <li><a href="<?php echo prep_url($data_title->pinterest); ?>" target="_blank"><img src="<?php echo IMG_PATH?>/assets/social4.png"/></a></li>
-            <?php endif;?>
-          </ul>
-          <ul>
-            <li><a href="<?php echo HOST_URL?>/ar"><img src="<?php echo IMG_PATH?>/assets/lang1.png"></a></li>
-            <li><a href="<?php echo HOST_URL?>/en"><img src="<?php echo IMG_PATH?>/assets/lang2.png"></a></li>
-            <!-- <li><a href="<?php echo HOST_URL?>/fr"><img src="<?php echo IMG_PATH?>/assets/lang3.png"></a></li>-->
-          </ul>
-        </div>
-        <div class="clearfix"></div>
-        <div class="main_nav">
-          <ul class="dropdown">
-            <li><a href="<?php echo HOST_URL?>/<?php echo $lan?>/#" class="smoothScroll"><?php echo lang("auto.home")?></a></li>
-            <li><a href="<?php echo HOST_URL?>/<?php echo $lan?>/#about" class="smoothScroll"><?php echo lang("auto.about_us")?></a></li>
-            <li><a href="<?php echo HOST_URL?>/<?php echo $lan?>/#service" class="smoothScroll"><?php echo lang("auto.our_services")?></a></li>
-            <li><a href="<?php echo HOST_URL?>/<?php echo $lan?>/#work" class="smoothScroll"><?php echo lang("auto.event_portfolio")?></a></li>
-            <li><a href="<?php echo HOST_URL?>/<?php echo $lan?>/#client" class="smoothScroll"><?php echo lang("auto.our_clients")?></a></li>
-            <li><a href="<?php echo HOST_URL?>/<?php echo $lan?>/#contact "class="smoothScroll"><?php echo lang("auto.contact_us")?></a></li>
-          </ul>
+                  <?php if (!empty($data_title->instagram)):?>
+                      <li><a href="<?php echo prep_url($data_title->instagram); ?>" target="_blank"><img src="<?php echo IMG_PATH?>/assets/social3.png"/></a></li>
+                  <?php endif;?>
+
+                  <?php if (!empty($data_title->pinterest)):?>
+                      <li><a href="<?php echo prep_url($data_title->pinterest); ?>" target="_blank"><img src="<?php echo IMG_PATH?>/assets/social4.png"/></a></li>
+                  <?php endif;?>
+                </ul>
+                <ul>
+                  <LI class="register"><a href="<?php echo HOST_URL?>/<?php echo $lan?>/register">register with us</a></LI>
+                </ul>
+
+              </div>
+              <div class="clearfix"></div>
+              <div class="main_nav">
+                <ul class="dropdown">
+                  <li><a href="<?php echo HOST_URL?>/<?php echo $lan?>/#" class="smoothScroll"><?php echo lang("auto.home")?></a></li>
+                  <li><a href="<?php echo HOST_URL?>/<?php echo $lan?>/#about" class="smoothScroll"><?php echo lang("auto.about_us")?></a></li>
+                  <li><a href="<?php echo HOST_URL?>/<?php echo $lan?>/#service" class="smoothScroll"><?php echo lang("auto.our_services")?></a></li>
+                  <li><a href="<?php echo HOST_URL?>/<?php echo $lan?>/#work" class="smoothScroll"><?php echo lang("auto.event_portfolio")?></a></li>
+                  <li><a href="<?php echo HOST_URL?>/<?php echo $lan?>/#client" class="smoothScroll"><?php echo lang("auto.our_clients")?></a></li>
+                  <li><a href="<?php echo HOST_URL?>/<?php echo $lan?>/#contact "class="smoothScroll"><?php echo lang("auto.contact_us")?></a></li>
+                </ul>
+              </div>
+              <div class="clearfix"></div>
+            </nav>
+          </div>
         </div>
         <div class="clearfix"></div>
-      </nav>
-    </div>
-  </div>
-  <div class="clearfix"></div>
 </div>
 <!--HEADER END-->

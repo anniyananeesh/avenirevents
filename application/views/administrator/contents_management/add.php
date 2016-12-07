@@ -32,10 +32,7 @@
 				<div class="col-contents">
 					<div class="fieldTitle">Heading (English) : </div>
 					<div><?php echo form_input('heading_en',$heading_en, 'id="heading_en" class="textBox required"'); ?></div>
-					<div class="spacer">&nbsp;</div>
-                    <div class="fieldTitle">Heading (Arabic) : </div>
-					<div><?php echo form_input('heading_ar',$heading_ar, 'id="heading_ar" class="textBox arabic text_align2 required"'); ?></div>
-					<div class="spacer">&nbsp;</div>
+					<div class="spacer">&nbsp;</div> 
 
                     <div class="fieldTitle">Website Title : </div>
 					<div><?php echo form_textarea('website_title', $website_title, 'id="website_title" class="textArea required"'); ?></div>
@@ -49,29 +46,18 @@
                                         <div class="spacer">&nbsp;</div>
 
 					<div>
-                                            <div class="fieldTitle">Description Small (English) : </div>
+                                            <div class="fieldTitle">Description Small : </div>
 					</div>
 					<div class="clear"><?php echo form_textarea('description_sm_en', $description_sm_en, 'id="description_sm" style="height:60px; width:80%;" class="required"'); ?></div>
                                         <div class="spacer">&nbsp;</div>
 
-					<div>
-                                            <div class="fieldTitle">Description Small (Arabic) : </div>
-					</div>
-					<div class="clear"><?php echo form_textarea('description_sm_ar', $description_sm_ar, 'id="description_sm_ar" style="height:60px; width:80%;" class="required"'); ?></div>
-
-
 					<?php if($parent_name != 'home'):?>
 					<div class="spacer">&nbsp;</div>
 					<div>
-                                            <div class="fieldTitle">Description (English) : </div>
+                                            <div class="fieldTitle">Description : </div>
 					</div>
 					<div class="clear"><?php echo form_textarea('description_en', $description_en, 'id="description_en" class="editor"'); ?></div>
                                         <div class="spacer">&nbsp;</div>
-
-					<div>
-                                            <div class="fieldTitle">Description (Arabic) : </div>
-					</div>
-					<div class="clear"><?php echo form_textarea('description_ar', $description_ar, 'id="description_ar" class="editor arabic"'); ?></div>
 
 					                         <?php endif;?>
 				</div>

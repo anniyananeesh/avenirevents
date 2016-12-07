@@ -25,7 +25,7 @@
 				<a href="<?=HOST_URL?>/<?=$folder_name?>/add/<?=$parent_id?>/<? echo url_title($parent_name); ?>"><li>
 					<div class="icon_new">&nbsp;</div>
 					<div class="action_text">New</div>
-				</li></a>				
+				</li></a>
 				<li class="line lineHover">&nbsp;</li>
 				<li><input type="submit" name="btnsubmit" id="btnpublish" value="Publish" class="btn_publish" ></li>
 				<li><input type="submit" name="btnsubmit" id="btnunpublish" value="Unpublish" class="btn_unpublish" ></li>
@@ -83,7 +83,6 @@
 						<td align="left" valign="middle"><table width="100%" border="0" cellspacing="0" cellpadding="0">
 						<tr>
 							<td width="50%" align="left" valign="middle"><a href="<?=HOST_URL?>/<?=$folder_name?>/pages/<?=$parent_id?>/<?=$parent_name?>/sort/heading_en/by/<?=$sortby?><?=$urlparams?>/offset/<?=$offset?>" class="listHeading">Page Name (English) </a> <img src="<?=ADMIN_IMG_PATH?>/<?php echo ((isset($sort_heading_en))?$sort_heading_en:"sort_empty.png"); ?>" align="absmiddle" class="sort_image"/></td>
-                            <td align="left" valign="middle"><a href="<?=HOST_URL?>/<?=$folder_name?>/pages/<?=$parent_id?>/<?=$parent_name?>/sort/heading_ar/by/<?=$sortby?><?=$urlparams?>/offset/<?=$offset?>" class="listHeading">Page Name (Arabic) </a> <img src="<?=ADMIN_IMG_PATH?>/<?php echo ((isset($sort_heading_ar))?$sort_heading_ar:"sort_empty.png"); ?>" align="absmiddle" class="sort_image"/></td>
 						</tr>
 						</table></td>
 						<td width="60" align="center" valign="middle">Image</td>
@@ -100,19 +99,19 @@
 			<div class="list">
 				<?php
 					foreach($data_list as $key=>$value){
-						
-						if (!isset($is_featured)){ $is_featured= "";} 
+
+						if (!isset($is_featured)){ $is_featured= "";}
 						$image1_name  = $value->image1;
 						$is_active    = $value->is_active;
 						$can_delete    = $value->can_delete;
 						$is_featured  = $value->is_featured;
 						$featured_img = (($is_featured=="Y")? '<img src="'.ADMIN_IMG_PATH.'/featured.png" alt="Featured">' : '');
-						$status_img   = (($is_active=="Y")?   '<img src="'.ADMIN_IMG_PATH.'/publish.png" alt="Publish">' : 
+						$status_img   = (($is_active=="Y")?   '<img src="'.ADMIN_IMG_PATH.'/publish.png" alt="Publish">' :
 																		  '<img src="'.ADMIN_IMG_PATH.'/unpublish.png" alt="Unpublish">');
-						
-						$image_path   = (!empty($image1_name) ? $this->thumb_show_path.'/'.$image1_name : ADMIN_IMG_PATH."/no_admin_image.png");						
+
+						$image_path   = (!empty($image1_name) ? $this->thumb_show_path.'/'.$image1_name : ADMIN_IMG_PATH."/no_admin_image.png");
 						$bgClass = (($bgClass=="bgcolor1") ? "bgcolor2" : "bgcolor1");
-						
+
 				?>
 				<div class="listitem selected <?=$bgClass?>">
 				<table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -126,8 +125,7 @@
 						<td align="left" valign="middle"><table width="100%" border="0" cellspacing="0" cellpadding="0">
 							<tr>
 								<td width="50%" align="left" valign="middle"><a href="<?=HOST_URL?>/<?=$folder_name?>/view/<? echo $value->id; ?>/<?=$parent_id?>/<?=$parent_name?>" title="Click to view details" class="listLink"><? echo $value->heading_en; ?></a></td>
-                               <td align="left" valign="middle" class="arabic"><? echo $value->heading_ar; ?></td>
-							</tr>
+ 							</tr>
 						</table></td>
 						<td width="60" align="center" valign="middle"><img src="<?=$image_path?>" width="35" class="thumb" border="0" /></td>
 						<td width="100" align="center" valign="middle"><input type="text" name="orderby[]" id="orderby[]" style="width:30px;text-align:center" class="index_list" value="<?php echo $value->orderby; ?>" tabindex="<?php echo $key; ?>" /><input type="hidden" name="idarray[]" id="idarray[]" value="<?php echo $value->id; ?>" /></td>
@@ -152,7 +150,7 @@
 	</div>
 	<? echo form_hidden('is_order', ''); ?>
 	<? echo form_close(); ?>
-</div>	
+</div>
 <script src="<?=JS_PATH?>/admin_validation.js"></script>
 <script language="javascript">
 	$('#btndelete').click(function(){
@@ -164,20 +162,20 @@
 			DeleteRecord();
 		}
 	});
-	
+
 	/*$('.listitem').click(function(){
-   
+
 		var chk = $(this).find('input[type=checkbox]');
 		if(chk.is(':checked') == false){
 		 chk.attr('checked', true);}
 		else{
-		 chk.attr('checked', false); 
+		 chk.attr('checked', false);
 		}
    });*/
-  
+
 	function DeleteRecord(){
 		document.frmListing.action="<?=HOST_URL?>/<?=$folder_name?>/delete/-/<?=$parent_id?>/<?=$parent_name?>";
 		document.frmListing.submit();
 	}
-	
+
 </script>

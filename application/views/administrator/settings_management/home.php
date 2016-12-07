@@ -163,12 +163,7 @@
 					<div class="spacer">&nbsp;</div>
 					<div class="fieldTitle">Address : </div>
 					<div><?php echo form_textarea('cn_address_en',$cn_address_en, 'id="cn_address_en" class="textBoxSmall" style="width:250px;"'); ?></div>
-                    <div class="spacer" style="height:30px;">&nbsp;</div>
-
-
-										<div class="fieldTitle">Address (Arabic): </div>
-										<div><?php echo form_textarea('cn_address_ar',$cn_address_ar, 'id="cn_address_ar" class="textBoxSmall" style="width:250px;"'); ?></div>
-					                    <div class="spacer" style="height:30px;">&nbsp;</div>
+                    <div class="spacer" style="height:30px;">&nbsp;</div> 
 
 
                 	<div class="fieldTitle">Email Client registration:</div>

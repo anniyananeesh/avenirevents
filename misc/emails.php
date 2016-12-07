@@ -33,9 +33,9 @@ $contact_email = "<body leftmargin='0' topmargin='0' style='background-color:#E2
                 <tr>
                   <td align='left' valign='middle'><table width='100%' border='0' align='center' cellpadding='10' cellspacing='5' bgcolor='#FFF'>
                       <tr>
-                        <td align='left' valign='top' style='color:#555'><p><font face='Verdana, Arial, Helvetica, sans-serif' size='2'><font size='5'>D</font><b>ear 
+                        <td align='left' valign='top' style='color:#555'><p><font face='Verdana, Arial, Helvetica, sans-serif' size='2'><font size='5'>D</font><b>ear
                             Administrator,</b></font></p>
-                          <p><font size='2' face='Verdana, Arial, Helvetica, sans-serif'>A user contacted you from <strong>$txt_site_name</strong> (Contact us Form). 
+                          <p><font size='2' face='Verdana, Arial, Helvetica, sans-serif'>A user contacted you from <strong>$txt_site_name</strong> (Contact us Form).
                             Please review the user's Questions/Comments.<br>
                             <br>
                             Below are details: <strong><br>
@@ -44,9 +44,9 @@ $contact_email = "<body leftmargin='0' topmargin='0' style='background-color:#E2
   </strong><strong> Full Name :</strong> $full_name<br>
   <strong>Email :</strong> $email<br>
   <strong>Phone :</strong> $phone<br>
-  <strong>Question/Comments :</strong> $comments<br />
+  <strong>Message :</strong> $comments<br />
   <br />
-                            Wishing you the 
+                            Wishing you the
                             best.</font></p>
                           <p><font face='Verdana, Arial, Helvetica, sans-serif' size='5'>S</font><font face='Verdana, Arial, Helvetica, sans-serif' size='2'><b>incerely,</b><br />
                         <font color='#000066'><a href='http://$txt_site_name' style='color:#555'>$txt_site_name</a></font></font></p></td>
@@ -116,11 +116,11 @@ $reset_pwd = "<body leftmargin='0' topmargin='0' style='background-color:#E2E2E2
                 <tr>
                   <td align='left' valign='middle'><table width='100%' border='0' align='center' cellpadding='10' cellspacing='5' bgcolor='#FFF'>
                       <tr>
-                        <td align='left' valign='top' style='color:#555'><p><font face='Verdana, Arial, Helvetica, sans-serif' size='2'><font size='5'>D</font>ear<b> 
+                        <td align='left' valign='top' style='color:#555'><p><font face='Verdana, Arial, Helvetica, sans-serif' size='2'><font size='5'>D</font>ear<b>
                             $name,</b></font></p>
                           <p>Your new password is : $rstPwd<br>
-                             
-                            Wishing you the 
+
+                            Wishing you the
                             best.</p>
                           <p><font face='Verdana, Arial, Helvetica, sans-serif' size='5'>S</font><font face='Verdana, Arial, Helvetica, sans-serif' size='2'><b>incerely,</b><br />
                         <font color='#000066'><a href='http://$txt_site_name' style='color:#555'>$txt_site_name</a></font></font></p></td>
@@ -189,11 +189,11 @@ $company_reg_email = "<body leftmargin='0' topmargin='0' style='background-color
                 <tr>
                   <td align='left' valign='middle'><table width='100%' border='0' align='center' cellpadding='10' cellspacing='5' bgcolor='#FFF'>
                       <tr>
-                        <td align='left' valign='top' style='color:#555'><p><font face='Verdana, Arial, Helvetica, sans-serif' size='2'><font size='5'>D</font>ear<b> 
+                        <td align='left' valign='top' style='color:#555'><p><font face='Verdana, Arial, Helvetica, sans-serif' size='2'><font size='5'>D</font>ear<b>
                             $name,</b></font></p>
                           <p><font size='2' face='Verdana, Arial, Helvetica, sans-serif'>Thanks for registering with us<br>
-                             
-                            Wishing you the 
+
+                            Wishing you the
                             best.</font></p>
                           <p><font face='Verdana, Arial, Helvetica, sans-serif' size='5'>S</font><font face='Verdana, Arial, Helvetica, sans-serif' size='2'><b>incerely,</b><br />
                         <font color='#000066'><a href='http://$txt_site_name' style='color:#555'>$txt_site_name</a></font></font></p></td>
@@ -263,7 +263,7 @@ $registration_email = "<body leftmargin='0' topmargin='0' style='background-colo
                 <tr>
                   <td align='left' valign='middle'><table width='100%' border='0' align='center' cellpadding='10' cellspacing='5' bgcolor='#FFF'>
                       <tr>
-                        <td align='left' valign='top' style='color:#555'><p><font face='Verdana, Arial, Helvetica, sans-serif' size='2'><font size='5'>D</font>ear<b> 
+                        <td align='left' valign='top' style='color:#555'><p><font face='Verdana, Arial, Helvetica, sans-serif' size='2'><font size='5'>D</font>ear<b>
                             $full_name,</b></font></p>
                           <p><font size='2' face='Verdana, Arial, Helvetica, sans-serif'>Thanks for registering with us<br>
                             <br>
@@ -273,9 +273,9 @@ $registration_email = "<body leftmargin='0' topmargin='0' style='background-colo
   </strong><strong> Code :</strong> $code<br>
   <strong>Name :</strong> $full_name<br>
   <strong>Email :</strong> $email<br>
-  <strong>Phone :</strong> $phone<br> 
+  <strong>Phone :</strong> $phone<br>
   <br />
-                            Wishing you the 
+                            Wishing you the
                             best.</font></p>
                           <p><font face='Verdana, Arial, Helvetica, sans-serif' size='5'>S</font><font face='Verdana, Arial, Helvetica, sans-serif' size='2'><b>incerely,</b><br />
                         <font color='#000066'><a href='http://$txt_site_name' style='color:#555'>$txt_site_name</a></font></font></p></td>
@@ -345,9 +345,9 @@ $appointment_email = "<body leftmargin='0' topmargin='0' style='background-color
                 <tr>
                   <td align='left' valign='middle'><table width='100%' border='0' align='center' cellpadding='10' cellspacing='5' bgcolor='#FFF'>
                       <tr>
-                        <td align='left' valign='top' style='color:#555'><p><font face='Verdana, Arial, Helvetica, sans-serif' size='2'><font size='5'>D</font><b>ear 
+                        <td align='left' valign='top' style='color:#555'><p><font face='Verdana, Arial, Helvetica, sans-serif' size='2'><font size='5'>D</font><b>ear
                             Administrator,</b></font></p>
-                          <p><font size='2' face='Verdana, Arial, Helvetica, sans-serif'>A user requested an appointment from <strong>$txt_site_name</strong> (Appointment Form). 
+                          <p><font size='2' face='Verdana, Arial, Helvetica, sans-serif'>A user requested an appointment from <strong>$txt_site_name</strong> (Appointment Form).
                             Please review the user's Questions/Comments.<br>
                             <br>
                             Below are details: <strong><br>
@@ -360,7 +360,7 @@ $appointment_email = "<body leftmargin='0' topmargin='0' style='background-color
   <strong>Prefered Time :</strong> $preferred_time<br>
   <strong>Question/Comments :</strong> $comments<br />
   <br />
-                            Wishing you the 
+                            Wishing you the
                             best.</font></p>
                           <p><font face='Verdana, Arial, Helvetica, sans-serif' size='5'>S</font><font face='Verdana, Arial, Helvetica, sans-serif' size='2'><b>incerely,</b><br />
                         <font color='#000066'><a href='http://$txt_site_name' style='color:#555'>$txt_site_name</a></font></font></p></td>

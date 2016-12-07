@@ -20,16 +20,16 @@
 
 /* OPTIONAL - Basic Skin */
 
-.responsive-tabs-wrapper {
+.responsive-tabs-wrapper { 
 	clear: both;
 	zoom: 1;
-	padding:20px 0px 20px 0px;
+	padding:20px 0px 20px 0px; 
 }
 .responsive-tabs-wrapper:before,
 .responsive-tabs-wrapper:after {
     content: "";
     display: table;
-}
+} 
 .responsive-tabs-wrapper:after {
     clear: both;
 }
@@ -45,7 +45,7 @@
 .responsive-tabs__list { font-size: 18px; font-weight:500; margin: 2em 0 .25em 0; padding: 0;border-bottom: 1px solid #000; padding-bottom:11px; line-height: 1em;}
 .responsive-tabs__list__item {  padding: 10px 20px; text-transform:uppercase; }
 .responsive-tabs__list__item:hover {background: #000; color:#fff; }
-.responsive-tabs__list__item--active,
+.responsive-tabs__list__item--active, 
 .responsive-tabs__list__item--active:hover {  background: #000;  color:#fff;}
 
 .responsive-tabs__panel { margin-bottom: 60px;}
@@ -53,7 +53,7 @@
 
 
 @media (max-width: 767px) {
-	.responsive-tabs__heading {
+	.responsive-tabs__heading { 
 		padding: 1em;  /*border: 1px solid #ccc; box-shadow: 0px 2px 3px rgba(0,0,0,0.4)*/;
 		background: #fff;
 		position: relative;
@@ -74,8 +74,8 @@
 
 		right: 20px;
 		top: 40%;
-		width: 0;
-		height: 0;
+		width: 0; 
+		height: 0; 
 		border-left: 10px solid transparent;
 		border-right: 10px solid transparent;
 		border-top: 10px solid #000;
@@ -87,7 +87,7 @@
 		border-bottom: 10px solid #000;
 		border-top:0;
 	 }
-
+	 
 
 }
 
