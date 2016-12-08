@@ -29,7 +29,7 @@ class Register extends CI_Controller
     function model()
     {
 
-        $data["page"]        = "register_model";
+        $data["page"]        = "register/model";
         $data["active_menu"] = "register_model";
         $data['languages'] = $this->modelLangAlias->getAllLanguages();
 

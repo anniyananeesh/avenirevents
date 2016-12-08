@@ -195,7 +195,7 @@ class Model_models extends MY_Model{
 
  	public function hasUsername($username)
  	{
- 		$model = parent::get_detail(array('username'=>mysql_real_escape_string($username)));
+ 		$model = parent::get_detail(array('email'=>mysql_real_escape_string($username)));
  		return ($model) ? TRUE : FALSE;
  	}
 

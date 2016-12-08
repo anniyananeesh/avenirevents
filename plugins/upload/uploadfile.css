@@ -90,8 +90,8 @@ margin-right:5px;
 }
 .ajax-file-upload {
 
-display: inline-block;
-padding: 6px 12px;
+display: inline-block!important;
+
 margin-bottom: 0;
 font-size: 14px;
 font-weight: 400;
@@ -108,9 +108,8 @@ cursor: pointer;
 user-select: none;
 background-image: none;
 border: 1px solid transparent;
-border-radius: 4px;
+
 color: #fff;
-background-color: #337ab7;
 }
 
 .ajax-file-upload:hover {
