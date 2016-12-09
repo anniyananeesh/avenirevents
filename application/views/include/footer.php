@@ -45,7 +45,7 @@
 
 																var formData = $("#get-quote").serialize();
 
-																$.get('<?php echo HOST_URL?>/<?php echo $lan?>/async/get_quote?' + formData, function(res){
+																$.get('<?php echo HOST_URL?>/<?php echo $lan?>/async/quote?' + formData, function(res){
 
 																		if(res.code == 200)
 																		{

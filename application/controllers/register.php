@@ -13,9 +13,9 @@ class Register extends CI_Controller
 
         $this->load->library('encrypt');
 
-        $this->load->model('model_country','modelCtryAlias');
-        $this->load->model('model_languages','modelLangAlias');
-        $this->load->model('model_company','modelUserAlias');
+        $this->load->model('model_country', 'modelCtryAlias');
+        $this->load->model('model_languages', 'modelLangAlias');
+        $this->load->model('model_company', 'modelUserAlias');
 
     }
 
@@ -31,14 +31,14 @@ class Register extends CI_Controller
 
         $data["page"]        = "register/model";
         $data["active_menu"] = "register_model";
-        $data['languages'] = $this->modelLangAlias->getAllLanguages();
+        $data['languages']   = $this->modelLangAlias->getAllLanguages();
 
         $this->load->view("template", $data);
     }
 
     function promoter()
     {
-        $data["page"]        = "register_promoter";
+        $data["page"]        = "register/promoter";
         $data["active_menu"] = "register_promoter";
 
         $data['languages'] = $this->modelLangAlias->getAllLanguages();
@@ -47,26 +47,38 @@ class Register extends CI_Controller
 
     function stylist()
     {
-        $data["page"]        = "register_stylist";
+        $data["page"]        = "register/stylist";
         $data["active_menu"] = "register_stylist";
 
         $data['languages'] = $this->modelLangAlias->getAllLanguages();
         $this->load->view("template", $data);
     }
 
-    public function validate_username($str){
+    function hostess()
+    {
+        $data["page"]        = "register/hostess";
+        $data["active_menu"] = "register_hostess";
 
-        $where = array(
-            'username' => $str
-        );
+        $data['languages'] = $this->modelLangAlias->getAllLanguages();
+        $this->load->view("template", $data);
+    }
 
-        if($this->modelUserAlias->hasUsername($where)){
-            $this->form_validation->set_message('validate_username', 'You are already registered with us.');
-            return false;
-        } else {
-            return true;
-        }
+    function photographers()
+    {
+        $data["page"]        = "register/photographer";
+        $data["active_menu"] = "register_photographer";
 
+        $data['languages'] = $this->modelLangAlias->getAllLanguages();
+        $this->load->view("template", $data);
+    }
+
+    function entertainer()
+    {
+        $data["page"]        = "register/entertainer";
+        $data["active_menu"] = "register_entertainer";
+
+        $data['languages'] = $this->modelLangAlias->getAllLanguages();
+        $this->load->view("template", $data);
     }
 
 }
