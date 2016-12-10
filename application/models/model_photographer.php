@@ -4,7 +4,7 @@ class Model_photographer extends MY_Model
 {
 
     protected $table_name = TBL_PHOTOGRAPHER;
-    protected $_lang_tbl = TBL_PHOTOGRAPHER_LANGUAGE;
+    protected $_lang_tbl = "tbl_photographer_language";
     protected $table_images = TBL_PHOTOGRAPHER_IMAGES;
 
     public function hasUsername($where)

@@ -4,7 +4,7 @@ class Model_hostess extends MY_Model
 {
 
     protected $table_name = TBL_HOSTESS;
-    protected $_lang_tbl = TBL_HOSTESS_LANGUAGE;
+    protected $_lang_tbl = "tbl_hostess_language";
     protected $table_images = TBL_HOSTESS_IMAGES;
 
     public function hasUsername($where)

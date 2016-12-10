@@ -4,7 +4,7 @@ class Model_entertainer extends MY_Model
 {
 
     protected $table_name = TBL_ENTERTAINER;
-    protected $_lang_tbl = TBL_ENTERTAINER_LANGUAGE;
+    protected $_lang_tbl = "tbl_entertainer_language";
     protected $table_images = TBL_ENTERTAINER_IMAGES;
 
     public function hasUsername($where)

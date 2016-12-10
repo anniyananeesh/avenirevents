@@ -6,7 +6,7 @@ class Model_stylist extends MY_Model
 {
 
     protected $table_name = TBL_STYLIST;
-    protected $_lang_tbl = TBL_STYLIST_LANGUAGE;
+    protected $_lang_tbl = "tbl_stylist_language";
 
     public function hasUsername($where)
     {
