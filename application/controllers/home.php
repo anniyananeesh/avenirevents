@@ -52,7 +52,7 @@ class Home extends CI_Controller
         //Get all clients
         $this->load->model('model_clients');
   			$data["data_clients"] = $this->model_clients->get_all_records(array('is_active'=>'Y'), 0, 10000, 'orderby', 'ASC');
-
+        
         //Get all clients
         $this->load->model('model_reviews');
   			$data["data_reviews"] = $this->model_reviews->get_all_records(array('is_active'=>'Y'), 0, 10000, 'orderby', 'ASC');

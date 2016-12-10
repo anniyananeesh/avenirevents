@@ -30,11 +30,7 @@
 			<div class="left-colum">
 				<div class="col-contents">
 					<div class="fieldTitle">Banner Title : </div>
-					<div><?php echo form_input('title_en',$title_en, 'id="title_en" class="textBox required"'); ?></div>
-					<div class="spacerBig">&nbsp;</div>
-
-          <div class="fieldTitle">Banner Title (Arabic) : </div>
-					<div><?php echo form_input('title_ar',$title_ar, 'id="title_ar" class="textBox arabic textAlign2 required"'); ?></div>
+					<div><?php echo form_textarea('title_en',$title_en, 'id="title_en" class="textBoxSmall" style="width:250px; height: 50px;"'); ?></div>
 					<div class="spacerBig">&nbsp;</div>
 
                     <div class="spacerBig">&nbsp;</div>

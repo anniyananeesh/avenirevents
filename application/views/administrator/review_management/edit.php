@@ -29,32 +29,24 @@
 		<div id="panel">
 			<div class="left-colum">
 				<div class="col-contents">
-					<div class="fieldTitle">Name (English) : </div>
+					<div class="fieldTitle">Title : </div>
 					<div><?php echo form_input('heading_en',$heading_en, 'id="heading_en" class="textBox required"'); ?></div>
 					<div class="spacer">&nbsp;</div>
-                    <div class="fieldTitle">Name (Arabic) : </div>
-					<div><?php echo form_input('heading_ar',$heading_ar, 'id="heading_ar" class="textBox arabic text_align2 required"'); ?></div>
-					<div class="spacer">&nbsp;</div>
 
 
-					<div class="fieldTitle">Designation (English) : </div>
-					<div><?php echo form_input('desig_en',$desig_en, 'id="desig_en" class="textBox required"'); ?></div>
+					<div class="fieldTitle">Date : </div>
+					<div><?php echo form_input('event_date',$event_date, 'id="event_date" class="textBox required" placeholder="dd-mm-yyyy"'); ?></div>
 					<div class="spacer">&nbsp;</div>
-										<div class="fieldTitle">Designation (Arabic) : </div>
-					<div><?php echo form_input('desig_ar',$desig_ar, 'id="desig_ar" class="textBox arabic text_align2 required"'); ?></div>
+
+					<div class="fieldTitle">Venue : </div>
+					<div><?php echo form_input('venue_en',$venue_en, 'id="venue_en" class="textBox required"'); ?></div>
 					<div class="spacer">&nbsp;</div>
 
 					<div>
 						<div class="fieldTitle">Description (English) : </div>
 					</div>
-					<div class="clear"><?php echo form_textarea('description_en', $description_en, 'id="description_en" class="editor"'); ?></div>
-                    <div class="spacer">&nbsp;</div>
-
-					<div>
-						<div class="fieldTitle">Description (Arabic) : </div>
-					</div>
-					<div class="clear"><?php echo form_textarea('description_ar', $description_ar, 'id="description_ar" class="editor arabic"'); ?></div>
-
+					<div class="clear"><?php echo form_textarea('description_en', $description_en, 'id="description_en" class="editor" placeholder="mm-dd-yyyy"'); ?></div>
+          <div class="spacer">&nbsp;</div>
 
 				</div>
 			</div>

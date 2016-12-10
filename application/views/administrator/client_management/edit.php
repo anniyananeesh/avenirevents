@@ -10,8 +10,8 @@
 		<div class="icon"><img src="<?=ADMIN_IMG_PATH?>/icon_<?php echo $folder_name; ?>.png" alt="<?=$module_name?>" /></div>
 		<div><a href="<?=HOST_URL?>/<?=$folder_name?>" class="module_nameBig"><?php echo $module_name; ?> : Edit Record</a></div>
 		<div class="buttons">
-			<ul class="actions">				
-				<li><input type="submit" name="btnsubmit" id="btnsubmit" value="Save & Close" class="btn_save_close" ></li>			
+			<ul class="actions">
+				<li><input type="submit" name="btnsubmit" id="btnsubmit" value="Save & Close" class="btn_save_close" ></li>
 				<li class="line lineHover">&nbsp;</li>
 				<a href="<?=HOST_URL?>/<?=$folder_name?>"><li>
 					<div class="icon_back">&nbsp;</div>
@@ -28,16 +28,10 @@
 		<div id="panel_title">Edit Details</div>
 		<div id="panel">
 			<div class="left-colum">
-				<div class="col-contents">				
+				<div class="col-contents">
 					<div class="fieldTitle">Heading : </div>
 					<div><?php echo form_input('heading_en',$heading_en, 'id="heading_en" class="textBox required"'); ?></div>
-					<div class="spacer">&nbsp;</div>
-                 	<div class="fieldTitle">Heading Arabic: </div>
-					<div><?php echo form_input('heading_ar',$heading_ar, 'id="heading_ar" class="textBox arabic text_align2 required"'); ?></div>
-					<div class="spacer">&nbsp;</div>
-					<div class="fieldTitle">URL: </div>
-					<div><?php echo form_input('link',$link, 'id="link" class="textBox required"'); ?></div>
-					<div class="spacer">&nbsp;</div>
+					<div class="spacer">&nbsp;</div> 
 				</div>
 			</div>
 			<div class="rigth-colum">
@@ -58,15 +52,15 @@
 						<div class="box_gray_notice">Jpeg, Gif & PNG only</div>
 					</div>
 					<div class="box">
-						<div class="fieldTitle2">Image</div>						
+						<div class="fieldTitle2">Image</div>
 						<div><? echo form_upload('image1','', 'id="image1" class="fileBox"'); ?></div>
 						<div class="spacer">&nbsp;</div>
 						<? if (!empty($data_record->image1)){ ?>
-						<div class="fieldTitle2">&nbsp;</div>	
+						<div class="fieldTitle2">&nbsp;</div>
 						<div class="float1"><img src="<?=$this->image_show_path?><?=$data_record->image1?>" class="thumb" /> <img src="<?=ADMIN_IMG_PATH?>/cross.png" alt="Delete" hspace="2" border="0" onclick="javascript:if(delConfirmation()==true){DeleteFile('<?=$data_record->image1?>', 'image1')}" style="cursor:pointer;" /></div>
 						<? } ?>
 					</div>
-					
+
 				</div>
 			</div>
 		</div>
@@ -75,7 +69,7 @@
 	<?php echo form_hidden('file_name',''); ?>
 	<?php echo form_hidden('field_name',''); ?>
 	<?php echo form_close(); ?>
-</div>	
+</div>
 <script language="javascript">
 	function DeleteFile(filename, fieldname){
 		document.frmRegister.file_name.value = filename;

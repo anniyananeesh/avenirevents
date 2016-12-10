@@ -48,10 +48,11 @@ class Photographer extends CI_Controller
 
         @$model_region = $request->model_region;
         @$model_age = $request->model_age;
-        @$model_spl = $request->model_spl;
+        @$model_spl = serialize($request->model_spl);
         @$model_gender = $request->model_gender;
         @$model_marrital_status = $request->model_marrital_status;
         @$model_exp = $request->model_exp;
+        @$model_spl_other = $request->model_spl_other;
 
         $code    = $this->modelNameAlias->genUniqCode();
         $orderby = $this->modelNameAlias->lastOrderID();
@@ -78,6 +79,7 @@ class Photographer extends CI_Controller
                 $this->table . '.city' => @$city,
                 $this->table . '.country' => @$country,
                 $this->table . '.model_region' => @$model_region,
+                $this->table . '.model_spl_other' => @$model_spl_other,
                 $this->table . '.model_spl' => @$model_spl,
                 $this->table . '.model_gender' => @$model_gender,
                 $this->table . '.model_exp' => @$model_exp,
@@ -162,7 +164,7 @@ class Photographer extends CI_Controller
         );
 
         if ($this->modelNameAlias->updateRecord($save, @$id)) {
-          
+
             $data = array(
                 'error' => FALSE,
                 'message' => 'account updated'

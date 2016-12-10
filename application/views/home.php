@@ -26,7 +26,7 @@
                     <div class="header-text ">
                         <div class="col-md-12 text-center">
                             <h2>
-                            	<span><?php echo $bvalue->{title_.$lan};?></span>
+                            	<span><?php echo nl2br($bvalue->{title_.$lan});?></span>
                             </h2>
                         </div>
                     </div><!-- /header-text -->
@@ -96,7 +96,7 @@
 
          <div class="left_colmn ">
            <div class="img-container model">
-             <a href="model_reg.html"> <div class="img-back"><img src="<?php echo IMG_PATH?>/assets/model.jpg" class="img-responsive" /></div>
+             <a href="<?php echo HOST_URL?>/<?php echo $lan?>/register/model"> <div class="img-back"><img src="<?php echo IMG_PATH?>/assets/model.jpg" class="img-responsive" /></div>
              <h2 class="homeImageLink"> <span><?php echo lang("auto.models")?></span> </h2></a>
            </div>
          </div>
@@ -105,11 +105,11 @@
 
        <div class="md_colmn">
          <div class="img-container medium">
-           <a href="photographer_reg.html"> <div class="img-back3"><img src="<?php echo IMG_PATH?>/assets/photographer.jpg"  /></div>
+           <a href="<?php echo HOST_URL?>/<?php echo $lan?>/register/photographers"> <div class="img-back3"><img src="<?php echo IMG_PATH?>/assets/photographer.jpg"  /></div>
            <h2 class="homeImageLink"> <span><?php echo lang("auto.photographers")?></span> </h2></a>
          </div>
          <div class="img-container small">
-          <a href="stylist_reg.html"> <div class="img-back2"><img src="<?php echo IMG_PATH?>/assets/stylist.jpg" class="img-responsive" /></div>
+          <a href="<?php echo HOST_URL?>/<?php echo $lan?>/register/stylist"> <div class="img-back2"><img src="<?php echo IMG_PATH?>/assets/stylist.jpg" class="img-responsive" /></div>
            <h2 class="homeImageLink"> <span><?php echo lang("auto.stylist")?></span> </h2></a>
          </div>
          <div class="img-container small">
@@ -117,7 +117,7 @@
            <h2 class="homeImageLink"> <span><?php echo lang("auto.cast")?></span> </h2></a>
          </div>
          <div class="img-container medium">
-          <a href="entertainer_reg.html">  <div class="img-back4"><img src="<?php echo IMG_PATH?>/assets/entertainer.jpg" class="img-responsive" /></div>
+          <a href="<?php echo HOST_URL?>/<?php echo $lan?>/register/entertainer">  <div class="img-back4"><img src="<?php echo IMG_PATH?>/assets/entertainer.jpg" class="img-responsive" /></div>
            <h2 class="homeImageLink"> <span><?php echo lang("auto.entertainers")?></span> </h2></a>
          </div>
          <div class="clearfix"></div>
@@ -146,12 +146,12 @@
 
          <div class="right_colmn-img">
                <div class="img-container model2">
-                <a href="hostess_reg.html">  <div class="img-back"><img src="<?php echo IMG_PATH?>/assets/hostess.jpg" class="img-responsive" /></div>
+                <a href="<?php echo HOST_URL?>/<?php echo $lan?>/register/hostess">  <div class="img-back"><img src="<?php echo IMG_PATH?>/assets/hostess.jpg" class="img-responsive" /></div>
                  <h2 class="homeImageLink"> <span><?php echo lang("auto.hostess")?> </span> </h2></a>
                </div>
 
                <div class="img-container model2">
-                 <a href="promoter_reg.html"><div class="img-back4"><img src="<?php echo IMG_PATH?>/assets/promoters.jpg" class="img-responsive" /></div>
+                 <a href="<?php echo HOST_URL?>/<?php echo $lan?>/register/promoter"><div class="img-back4"><img src="<?php echo IMG_PATH?>/assets/promoters.jpg" class="img-responsive" /></div>
                  <h2 class="homeImageLink"> <span><?php echo lang("auto.promoters")?> </span> </h2></a>
                </div>
 
@@ -259,7 +259,7 @@
 													if (!empty($image)){ $image_path = CLIENT_IMAGE_PATH.$image;}
 
 											  ?>
-                    		<li><img  src="<?php echo $image_path?>" /></li>
+                    		<li title="<?php echo $bvalue->{heading_.$lan}?>"><img  src="<?php echo $image_path?>" /></li>
 										<?php endforeach;?>
                 </ul>
             </div>
@@ -287,10 +287,10 @@
 									<div class="item <?php echo ($bkey == 0) ? 'active' : '';?>">
 										<div class="col-lg-12">
 		                 <img src="<?php echo $image_path?>" alt="">
-										 <h1> Dubai fashion Week </h1>
-										 <p class="testcontent"><span>"</span> Cras nunc nisi, sagittis et nibh in, feugiat dapibus quam. Ut pellentesque dictum massa, pellentesque aliquet nisi aliquam in. Maecenas non sollicitudin dui. <span>"</span></p>
-										 <h2>Dubai Mall, Dubai</h2>
-										 <h3>Dec 12 - Dec 20</h3>
+										 <h1> <?php echo $bvalue->{heading_.$lan}?></h1>
+										 <p class="testcontent"><span>"</span> <?php echo stripslashes(strip_tags($bvalue->{description_.$lan}))?><span>"</span></p>
+										 <h2><?php echo $bvalue->{venue_.$lan}?></h2>
+										 <h3><?php echo $bvalue->event_date?></h3>
 										</div>
 
 									</div>

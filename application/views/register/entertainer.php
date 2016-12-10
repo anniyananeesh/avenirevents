@@ -16,6 +16,11 @@ $(function(){
      	csvDispCount: 3
 	});
 
+	$("#model_spl").SumoSelect({
+    	placeholder: 'Choose',
+     	csvDispCount: 3
+	});
+
 });
 
 function doRemoveThumb()
@@ -52,7 +57,8 @@ myApp.controller('SignupCtrl',function($scope, $http, $window) {
     model_age: 'below_6',
     model_exp: '',
     model_info: 'professional',
-    model_spl: 'Fashion Photographer',
+    model_spl: [],
+		model_spl_other: '',
     language: [],
     city: '',
     country: 'AE',
@@ -193,6 +199,7 @@ myApp.controller('SignupCtrl',function($scope, $http, $window) {
       model_marrital_status: $scope.user.model_marrital_status,
 			model_info: $scope.user.model_info,
       model_spl: $scope.user.model_spl,
+			model_spl_other: $scope.user.model_spl_other,
       <?php echo $this->security->get_csrf_token_name(); ?>: '<?php echo $this->security->get_csrf_hash(); ?>',
 
 		};
@@ -319,7 +326,7 @@ myApp.controller('SignupCtrl',function($scope, $http, $window) {
                   <div class="form-group">
                                   <label class="control-label">Specialised</label> <br>
 
-                                <select class="form-control" ng-model="user.model_spl">
+                                <select class="form-control" multiple name="model_spl" id="model_spl" ng-model="user.model_spl">
                                 <option value="DJ">DJ</option>
                                 <option value="Clown">Clown</option>
                                 <option value="Magician">Magician</option>
@@ -349,7 +356,7 @@ myApp.controller('SignupCtrl',function($scope, $http, $window) {
 
                               </div>
                                <div class="form-group">
-                                  <input type="text" class="form-control" placeholder="Not in the list Please Mension here" ng-model="user.model_spl" ng-focus="user.model_spl = ''">
+                                  <input type="text" class="form-control" placeholder="Not in the list Please Mension here" ng-model="user.model_spl_other">
                                 </div>
 
                                     <div class="form-group">

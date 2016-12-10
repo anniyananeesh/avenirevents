@@ -20,6 +20,7 @@ class Stylist_management extends Admin_Controller
     public $thumb_up_path = STYLIST_THUMB_UP_PATH;
     public $image_show_path = STYLIST_IMAGE_PATH;
     public $thumb_show_path = STYLIST_THUMB_PATH;
+    public $cv_up_path = STYLIST_CV_UP_PATH;
 
     public $search_field = "name";
     public $module_version = "1.0";
@@ -33,10 +34,9 @@ class Stylist_management extends Admin_Controller
         parent::__construct();
         $this->load->model($this->config->item('admin_folder') . "/model_logs", 'modelAdminLogs');
         $this->load->model($this->config->item('admin_folder') . "/" . $this->model_name, 'modelNameAlias');
-
-        $this->load->model($this->model_countries,'modelCountries');
+        $this->load->model($this->model_countries, 'modelCountries');
         $this->load->model('model_stylist');
-        $this->load->model('model_languages','modelLangAlias');
+        $this->load->model('model_languages', 'modelLangAlias');
     }
     /*
     |--------------------------------------------------------------------------
@@ -80,16 +80,13 @@ class Stylist_management extends Admin_Controller
         $data["searchBox"]         = $searchBox;
         $data["urlparams"]         = $urlparams;
 
-        if (!empty($searchBox))
-        {
+        if (!empty($searchBox)) {
             $where_array["code LIKE "] = $searchBox . "%";
         }
-        if ($filter_by == "published")
-        {
+        if ($filter_by == "published") {
             $where_array["is_active"] = "Y";
         }
-        if ($filter_by == "unpublished")
-        {
+        if ($filter_by == "unpublished") {
             $where_array["is_active"] = "N";
         }
 
@@ -135,120 +132,100 @@ class Stylist_management extends Admin_Controller
         $data['countries'] = $this->modelCountries->get_all_country();
         $data['languages'] = $this->modelLangAlias->getAllLanguages();
 
-        if (isset($_POST) && count($_POST) != 0)
-        {
-	          $name    = $this->input->post("name", TRUE);
-	          $contact_no    = $this->input->post("contact_no", TRUE);
-	          $email    = $this->input->post("email", TRUE);
-	          $language    = $this->input->post("language", TRUE);
-	          $is_active  = $this->input->post("is_active", TRUE);
-	          $description    = $this->input->post("description", TRUE);
-	          $model_region   = $this->input->post("model_region", TRUE);
-	          $model_info    = $this->input->post("model_info", TRUE);
-						$username = $this->input->post("username", TRUE);
-	          $pwd = $this->input->post("pwd", TRUE);
-	          $cpwd = $this->input->post("cpwd", TRUE);
+        if (isset($_POST) && count($_POST) != 0) {
 
-	          $error = FALSE;
+            $name        = $this->input->post("name", TRUE);
+            $contact_no  = $this->input->post("contact_no", TRUE);
+            $email       = $this->input->post("email", TRUE);
+            $language    = $this->input->post("language", TRUE);
+            $description = $this->input->post("description", TRUE);
+            $city        = $this->input->post("city", TRUE);
+            $country     = $this->input->post("country", TRUE);
 
-	          $is_active          = $this->input->post("is_active", TRUE);
+            $model_region          = $this->input->post("model_region", TRUE);
+            $model_info          = $this->input->post("model_info", TRUE);
+            $model_gender          = $this->input->post("model_gender", TRUE);
+            $model_age             = $this->input->post("model_age", TRUE);
+            $model_marrital_status = $this->input->post("model_marrital_status", TRUE);
+            $model_exp             = $this->input->post("model_exp", TRUE);
 
-						//Check if there is any profile picture
-	          $image1_name        = $_FILES["userfile"]["name"];
-	          $image1_tmp_name    = $_FILES["userfile"]["tmp_name"];
+            $is_active = $this->input->post("is_active", TRUE);
+
+            $error = FALSE;
+
+            $is_active       = $this->input->post("is_active", TRUE);
+            //Check if there is any profile picture
+            $image1_name     = $_FILES["userfile"]["name"];
+            $image1_tmp_name = $_FILES["userfile"]["tmp_name"];
 
             //Check if there is any CV uploaded
-            $cvFile             = $_FILES["filecv"]["name"];
-            $cvFile_tmp_name    = $_FILES["filecv"]["tmp_name"];
+            $cvFile          = $_FILES["filecv"]["name"];
+            $cvFile_tmp_name = $_FILES["filecv"]["tmp_name"];
 
             $is_exist_array = array(
                 'name' => $name
             );
 
-            if($pwd != "" || $cpwd != "")
-            {
-
-                if(strlen($pwd) < 8 || strlen($pwd) > 12)
-                {
-                    $error = TRUE;
-                    $data["Error"] = "Y";
-                    $data["MSG"]   = "Password must be minimum of 8 and maximum of 12 characters";
-                }
-
-                if($pwd != $cpwd)
-                {
-                    $error = TRUE;
-                    $data["Error"] = "Y";
-                    $data["MSG"]   = "Passwords not matching";
-                }
-
-            }else{
-                $error = TRUE;
-                $data["Error"] = "Y";
-                $data["MSG"]   = "Please enter passwords";
-            }
-
-            if($this->model_stylist->hasUsername(array('username'=>$username)))
-            {
-                $error = TRUE;
+            if ($this->model_stylist->hasUsername(array(
+                "email" => $username
+            ))) {
+                $error         = TRUE;
                 $data["Error"] = "Y";
                 $data["MSG"]   = "Username already taken";
             }
 
-            if(!$error)
-            {
-                if ($this->modelNameAlias->isExist($is_exist_array) == FALSE)
-                {
+            if (!$error) {
+
+                if ($this->modelNameAlias->isExist($is_exist_array) == FALSE) {
                     //If there is any image uploaded for profile
-                    if (!empty($image1_name))
-                    {
-                        $upload_array   =   $this->upload_image('userfile', $image1_name);
-                        $Image1Name     =   $upload_array["ImageName"];
-                        $data["MSG"]    =   $upload_array["msg"];
-                        $data["Error"]  =   $upload_array["err"];
-                        $uploadstatus   =   $upload_array["ups"];
+                    if (!empty($image1_name)) {
+                        $upload_array  = $this->upload_image('userfile', $image1_name);
+                        $Image1Name    = $upload_array["ImageName"];
+                        $data["MSG"]   = $upload_array["msg"];
+                        $data["Error"] = $upload_array["err"];
+                        $uploadstatus  = $upload_array["ups"];
                     }
 
                     //if there is any CV uploaded
-                    if(!empty($cvFile))
-                    {
-                        $upload_array  =  $this->upload_file('filecv', $cvFile);
-                        $CvName     =   $upload_array["FileName"];
-                        $data["MSG"]    =   $upload_array["msg"];
-                        $data["Error"]  =   $upload_array["err"];
-                        $uploadstatus   =   $upload_array["ups"];
+                    if (!empty($cvFile)) {
+                        $upload_array  = $this->upload_file('filecv', $cvFile, "", $this->cv_up_path);
+                        $CvName        = $upload_array["FileName"];
+                        $data["MSG"]   = $upload_array["msg"];
+                        $data["Error"] = $upload_array["err"];
+                        $uploadstatus  = $upload_array["ups"];
                     }
 
                     //Add to language table
-                    if(count($language) == 0)
-                    {
+                    if (count($language) == 0) {
                         $uploadstatus == 'Error';
-                        $data["MSG"]    =   'You must chosen a language';
-                        $data["Error"]  =   'Y';
+                        $data["MSG"]   = 'You must chosen a language';
+                        $data["Error"] = 'Y';
                     }
 
 
-                    if ($uploadstatus != "Error")
-                    {
+                    if ($uploadstatus != "Error") {
 
-                        $orderbyID      = $this->modelNameAlias->lastOrderID();
-                        $code = $this->model_company->genUniqCode();
-                        $uniqTokn = $this->model_company->genUniqToken($username);
-                        $hashKey = $this->model_company->genhashKey($cpwd, $uniqTokn);
+                        $orderbyID = $this->modelNameAlias->lastOrderID();
+                        $code      = $this->model_stylist->genUniqCode();
 
-                        $data_array     = array(
+                        $data_array = array(
 
                             "name" => mysql_real_escape_string($name),
                             "code" => mysql_real_escape_string($code),
+                            "image1" => mysql_real_escape_string($Image1Name),
                             "contact_no" => mysql_real_escape_string($contact_no),
                             "email" => mysql_real_escape_string($email),
-                            "username" => mysql_real_escape_string($username),
-                            "uniq_token" => mysql_real_escape_string($uniqTokn),
-                            "hash_key" => mysql_real_escape_string($hashKey),
-                            "r_password" => mysql_real_escape_string($cpwd),
                             "description" => mysql_real_escape_string($description),
+                            "city" => mysql_real_escape_string($city),
+                            "country" => mysql_real_escape_string($country),
+
                             "model_region" => mysql_real_escape_string($model_region),
                             "model_info" => mysql_real_escape_string($model_info),
+                            "model_gender" => mysql_real_escape_string($model_gender),
+                            "model_age" => mysql_real_escape_string($model_age),
+                            "model_exp" => mysql_real_escape_string($model_exp),
+                            "model_marrital_status" => mysql_real_escape_string($model_marrital_status),
+
                             "cv_path" => mysql_real_escape_string($CvName),
                             "orderby" => mysql_real_escape_string($orderbyID->orderby + 1),
                             "is_active" => mysql_real_escape_string($is_active),
@@ -263,7 +240,7 @@ class Stylist_management extends Admin_Controller
                         $this->model_stylist->removeLangByModel($last_insert_id);
 
                         foreach ($language as $key => $value) {
-                            $this->model_stylist->setLanguage($last_insert_id,$value);
+                            $this->model_stylist->setLanguage($last_insert_id, $value);
                         }
 
                         //If there are images for gallery
@@ -271,25 +248,23 @@ class Stylist_management extends Admin_Controller
 
                         $cpt = count($_FILES['image']['name']);
 
-                        for($i=0; $i<$cpt; $i++)
-                        {
+                        for ($i = 0; $i < $cpt; $i++) {
 
-                            if($_FILES['image']['tmp_name'][$i] != "")
-                            {
-                                $Image1Name = substr(md5(uniqid(rand())),0,15);
-                                $Image1Name = "IMG-".$Image1Name.strrchr($image1_name,".");
+                            if ($_FILES['image']['tmp_name'][$i] != "") {
+                                $Image1Name = substr(md5(uniqid(rand())), 0, 15);
+                                $Image1Name = "IMG-" . $Image1Name . strrchr($image1_name, ".");
 
-                                $config = array();
+                                $config                = array();
                                 $config['upload_path'] = STYLIST_IMAGE_UP_PATH;
-                                if (move_uploaded_file($_FILES['image']['tmp_name'][$i], STYLIST_IMAGE_UP_PATH.$Image1Name)) {
+                                if (move_uploaded_file($_FILES['image']['tmp_name'][$i], STYLIST_IMAGE_UP_PATH . $Image1Name)) {
 
-                                    include_once(CLASSES_PATH."/thumbnail_images.class.php");
-                                    $obj_img = new thumbnail_images();
+                                    include_once(CLASSES_PATH . "/thumbnail_images.class.php");
+                                    $obj_img             = new thumbnail_images();
                                     $obj_img->NewWidth   = 212;
                                     $obj_img->NewHeight  = 260;
                                     $obj_img->Cropping   = 'Y';
-                                    $obj_img->PathImgOld = STYLIST_IMAGE_UP_PATH."/".$Image1Name;
-                                    $obj_img->PathImgNew = STYLIST_THUMB_UP_PATH."/".$Image1Name;
+                                    $obj_img->PathImgOld = STYLIST_IMAGE_UP_PATH . "/" . $Image1Name;
+                                    $obj_img->PathImgNew = STYLIST_THUMB_UP_PATH . "/" . $Image1Name;
                                     $obj_img->create_thumbnail_images();
 
                                     $save_gallery = array(
@@ -298,7 +273,8 @@ class Stylist_management extends Admin_Controller
                                         'added_date' => date('Y-m-d h:i:s A')
                                     );
 
-                                    $this->model_stylist->save_photos($save_gallery);
+                                    $this->model_stylist->savePhotos($save_gallery);
+
 
                                 } else {
                                     echo "Sorry, there was an error uploading your file.";
@@ -313,47 +289,56 @@ class Stylist_management extends Admin_Controller
 
                         $data["MSG"] = "Record has been inserted successfully!";
 
-                        $data["name"]      = "";
-                        $data["contact_no"]      = "";
-                        $data["email"]      = "";
-                        $data["language"]      = "";
-                        $data["description"]      = "";
-                        $data["username"]      = "";
-                        $data["pwd"]      = "";
-                        $data["cpwd"]      = "";
+                        $data["name"]        = "";
+                        $data["contact_no"]  = "";
+                        $data["email"]       = "";
+                        $data["description"] = "";
+                        $data["city"]        = "";
+                        $data["country"]     = "";
+
+                        $data["model_region"]          = "";
+                        $data["model_info"]            = "";
+                        $data["model_gender"]          = "";
+                        $data["model_age"]             = "";
+                        $data["model_exp"]             = "";
+                        $data["model_marrital_status"] = "";
 
                     }
 
-                }
-                else
-                {
+                } else {
                     $data["Error"] = "Y";
                     $data["MSG"]   = "Record already exists!";
                 }
 
             }
 
-            if ($data["Error"] == "Y")
-            {
+            if ($data["Error"] == "Y") {
                 $data["name"]        = $name;
                 $data["contact_no"]  = $contact_no;
                 $data["email"]       = $email;
-                $data["language"]    = $language;
-                $data["description"]  = $description;
-                $data["username"]     =  $username;
-                $data["is_active"]    = $is_active;
+                $data["description"] = $description;
+                $data["city"]        = $city;
+                $data["country"]     = $country;
+
+                $data["language"]   = $language;
+                $data["is_active"] = $is_active;
+
+                $data["model_region"]          = $model_region;
+                $data["model_gender"]          = $model_gender;
+                $data["model_age"]             = $model_age;
+                $data["model_exp"]             = $model_exp;
+                $data["model_info"]             = $model_info;
+                $data["model_marrital_status"] = $model_marrital_status;
 
             }
 
-            if (!isset($data["Error"]) && $_POST["submit"] == "Save & Close")
-            {
+            if (!isset($data["Error"]) && $_POST["submit"] == "Save & Close") {
                 redirect(HOST_URL . "/" . $folder . "/a");
             }
         }
 
         $this->load->view($this->config->item('admin_folder') . "/template", $data);
     }
-
     /*
     |--------------------------------------------------------------------------
     | Edit Record
@@ -369,187 +354,195 @@ class Stylist_management extends Admin_Controller
         $record_id           = $this->uri->segment(3);
         $data_record         = $this->modelNameAlias->get_details($record_id);
         $data["data_record"] = $data_record;
+        $data['countries']   = $this->modelCountries->get_all_country();
+        $data['languages']   = $this->modelLangAlias->getAllLanguages();
+        $data['mdlLngs']     = $this->model_stylist->getLanguageByModel($record_id);
 
-        $data['languages'] = $this->modelLangAlias->getAllLanguages();
-        $data['mdlLngs'] = $this->model_stylist->getLanguageByModel($record_id);
-
-        if ($this->input->post("delete_file")=="Y")
-        {
-            $file_name      = $this->input->post("file_name", TRUE);
-            $field_name     = $this->input->post("field_name", TRUE);
-
-            if (!empty($file_name))
-            {
-                if (file_exists($this->thumb_up_path.$file_name)) { unlink($this->thumb_up_path.$file_name); }
-                if (file_exists($this->image_up_path.$file_name)) { unlink($this->image_up_path.$file_name); }
-                $data_array = array($field_name=>'');
+        if ($this->input->post("delete_file") == "Y") {
+            $file_name  = $this->input->post("file_name", TRUE);
+            $field_name = $this->input->post("field_name", TRUE);
+            if (!empty($file_name)) {
+                if (file_exists($this->thumb_up_path . $file_name)) {
+                    unlink($this->thumb_up_path . $file_name);
+                }
+                if (file_exists($this->image_up_path . $file_name)) {
+                    unlink($this->image_up_path . $file_name);
+                }
+                $data_array = array(
+                    $field_name => ''
+                );
                 $this->modelNameAlias->updateRecord($data_array, $record_id);
                 $data["MSG"] = "Selected File has been deleted successfully.";
 
-                $data_record = $this->modelNameAlias->get_details($record_id);
+                $data_record         = $this->modelNameAlias->get_details($record_id);
                 $data["data_record"] = $data_record;
             }
         }
 
         //Delete gallery file image
-        if ($this->input->post("delete_gallery_file")=="Y")
-        {
-            $file_name      = $this->input->post("file_gallery_name", TRUE);
-            $field_name     = $this->input->post("field_gallery_name", TRUE);
+        if ($this->input->post("delete_gallery_file") == "Y") {
+            $file_name  = $this->input->post("file_gallery_name", TRUE);
+            $field_name = $this->input->post("field_gallery_name", TRUE);
 
-            if (!empty($file_name))
-            {
-                if (file_exists($this->thumb_up_path.$file_name)) { unlink($this->thumb_up_path.$file_name); }
-                if (file_exists($this->image_up_path.$file_name)) { unlink($this->image_up_path.$file_name); }
+            if (!empty($file_name)) {
+                if (file_exists($this->thumb_up_path . $file_name)) {
+                    unlink($this->thumb_up_path . $file_name);
+                }
+                if (file_exists($this->image_up_path . $file_name)) {
+                    unlink($this->image_up_path . $file_name);
+                }
 
-                $this->model_stylist->deleteCompanyPhoto($record_id,$file_name);
+                $this->model_stylist->deleteModelPhoto($record_id, $file_name);
                 $data["MSG"] = "Selected File has been deleted successfully.";
             }
 
         }
 
-        if ($this->input->post("btnsubmit") == "Save & Close")
-        {
-            $name    = $this->input->post("name", TRUE);
-            $contact_no    = $this->input->post("contact_no", TRUE);
-            $email    = $this->input->post("email", TRUE);
+        if ($this->input->post("btnsubmit") == "Save & Close") {
+            $name        = $this->input->post("name", TRUE);
+            $contact_no  = $this->input->post("contact_no", TRUE);
+            $email       = $this->input->post("email", TRUE);
             $language    = $this->input->post("language", TRUE);
-            $is_active  = $this->input->post("is_active", TRUE);
-            $description    = $this->input->post("description", TRUE);
-            $model_region   = $this->input->post("model_region", TRUE);
-            $model_info    = $this->input->post("model_info", TRUE);
-            $pwd = $this->input->post("pwd", TRUE);
-            $cpwd = $this->input->post("cpwd", TRUE);
+            $description = $this->input->post("description", TRUE);
+            $city        = $this->input->post("city", TRUE);
+            $country     = $this->input->post("country", TRUE);
+
+            $model_region          = $this->input->post("model_region", TRUE);
+            $model_gender          = $this->input->post("model_gender", TRUE);
+            $model_age             = $this->input->post("model_age", TRUE);
+            $model_info             = $this->input->post("model_info", TRUE);
+            $model_marrital_status = $this->input->post("model_marrital_status", TRUE);
+            $model_exp             = $this->input->post("model_exp", TRUE);
+
+            $is_active = $this->input->post("is_active", TRUE);
 
             $error = FALSE;
 
-            if($pwd != "" || $cpwd != "")
-            {
+            if ($this->input->post("btnsubmit") == "Save & Close" && !$error) {
 
-                if(strlen($pwd) < 8 || strlen($pwd) > 12)
-                {
-                    $error = TRUE;
-                    $data["Error"] = "Y";
-                    $data["MSG"]   = "Password must be minimum of 8 and maximum of 12 characters";
+                //If there is any image uploaded for profile
+                if (!empty($image1_name)) {
+                    $upload_array  = $this->upload_image('userfile', $image1_name);
+                    $Image1Name    = $upload_array["ImageName"];
+                    $data["MSG"]   = $upload_array["msg"];
+                    $data["Error"] = $upload_array["err"];
+                    $uploadstatus  = $upload_array["ups"];
+                } else {
+                    $Image1Name = $data_record->image1;
                 }
 
-                if($pwd != $cpwd)
-                {
-                    $error = TRUE;
-                    $data["Error"] = "Y";
-                    $data["MSG"]   = "Passwords not matching";
-                }
-
-            }
-
-            if($this->input->post("btnsubmit")=="Save & Close" && !$error)
-            {
                 //if there is any CV uploaded
-                if(!empty($cvFile))
-                {
-                    $upload_array  =  $this->upload_file('filecv', $cvFile);
-                    $CvName     =   $upload_array["FileName"];
-                    $data["MSG"]    =   $upload_array["msg"];
-                    $data["Error"]  =   $upload_array["err"];
-                    $uploadstatus   =   $upload_array["ups"];
-                }else{
+                if (!empty($cvFile)) {
+                    $upload_array  = $this->upload_file('filecv', $cvFile, "", $this->cv_up_path);
+                    $CvName        = $upload_array["FileName"];
+                    $data["MSG"]   = $upload_array["msg"];
+                    $data["Error"] = $upload_array["err"];
+                    $uploadstatus  = $upload_array["ups"];
+                } else {
                     $CvName = $data_record->cv_path;
                 }
 
-                $data_array     = array(
+
+                $data_array = array(
                     "name" => mysql_real_escape_string($name),
+                    "code" => mysql_real_escape_string($code),
+                    "image1" => mysql_real_escape_string($Image1Name),
                     "contact_no" => mysql_real_escape_string($contact_no),
                     "email" => mysql_real_escape_string($email),
-                    "model_region" => mysql_real_escape_string($model_region),
-                    "model_info" => mysql_real_escape_string($model_info),
                     "description" => mysql_real_escape_string($description),
+                    "city" => mysql_real_escape_string($city),
+                    "country" => mysql_real_escape_string($country),
+
+                    "model_region" => mysql_real_escape_string($model_region),
+                    "model_gender" => mysql_real_escape_string($model_gender),
+                    "model_info" => mysql_real_escape_string($model_info),
+                    "model_age" => mysql_real_escape_string($model_age),
+                    "model_exp" => mysql_real_escape_string($model_exp),
+                    "model_marrital_status" => mysql_real_escape_string($model_marrital_status),
                     "cv_path" => mysql_real_escape_string($CvName),
                     "is_active" => mysql_real_escape_string($is_active)
                 );
-
-                if($pwd != "" && $cpwd != "")
-                {
-                    $hashKey = $this->model_stylist->genhashKey($pwd, $data_record->uniq_token);
-                    $data_array["hash_key"] = $hashKey;
-                    $data_array["r_password"] = $cpwd;
-                }
 
                 $this->modelNameAlias->updateRecord($data_array, $record_id);
                 $logData = getLogDetails($this->getModuleInfo()->module_name, $record_id);
 
                 //Add to language table
-                if(count($language) > 0)
-                {
+                if (count($language) > 0) {
+
                     $this->model_stylist->removeLangByModel($record_id);
 
                     foreach ($language as $key => $value) {
-                        $this->model_stylist->setLanguage($record_id,$value);
+                        $this->model_stylist->setLanguage($record_id, $value);
                     }
                 }
 
                 //If there are images for gallery
-                    $this->load->library('upload');
+                $this->load->library('upload');
 
-                    $cpt = count($_FILES['image']['name']);
+                $cpt = count($_FILES['image']['name']);
 
-                    for($i=0; $i<$cpt; $i++)
-                    {
+                for ($i = 0; $i < $cpt; $i++) {
 
-                        if($_FILES['image']['tmp_name'][$i] != "")
-                        {
-                            $image1_name2 = $_FILES['image']['name'][$i];
-                            $Image1Name = substr(md5(uniqid(rand())),0,15);
-                            $Image1Name = "IMG-".$Image1Name.strrchr($image1_name2,".");
+                    if ($_FILES['image']['tmp_name'][$i] != "") {
+                        $image1_name2 = $_FILES['image']['name'][$i];
+                        $Image1Name   = substr(md5(uniqid(rand())), 0, 15);
+                        $Image1Name   = "IMG-" . $Image1Name . strrchr($image1_name2, ".");
 
-                            $config = array();
-                            $config['upload_path'] = STYLIST_IMAGE_UP_PATH;
-                            if (move_uploaded_file($_FILES['image']['tmp_name'][$i], STYLIST_IMAGE_UP_PATH.$Image1Name)) {
+                        $config                = array();
+                        $config['upload_path'] = STYLIST_IMAGE_UP_PATH;
+                        if (move_uploaded_file($_FILES['image']['tmp_name'][$i], STYLIST_IMAGE_UP_PATH . $Image1Name)) {
 
-                                include_once(CLASSES_PATH."/thumbnail_images.class.php");
-                                $obj_img = new thumbnail_images();
-                                $obj_img->NewWidth   = 212;
-                                $obj_img->NewHeight  = 260;
-                                $obj_img->Cropping   = 'Y';
-                                $obj_img->PathImgOld = STYLIST_IMAGE_UP_PATH."/".$Image1Name;
-                                $obj_img->PathImgNew = STYLIST_THUMB_UP_PATH."/".$Image1Name;
-                                $obj_img->create_thumbnail_images();
+                            include_once(CLASSES_PATH . "/thumbnail_images.class.php");
+                            $obj_img             = new thumbnail_images();
+                            $obj_img->NewWidth   = 212;
+                            $obj_img->NewHeight  = 260;
+                            $obj_img->Cropping   = 'Y';
+                            $obj_img->PathImgOld = STYLIST_IMAGE_UP_PATH . "/" . $Image1Name;
+                            $obj_img->PathImgNew = STYLIST_THUMB_UP_PATH . "/" . $Image1Name;
+                            $obj_img->create_thumbnail_images();
 
-                                $save_gallery = array(
-                                    'stylist_fk' => $record_id,
-                                    'image' => $Image1Name,
-                                    'added_date' => date('Y-m-d h:i:s A')
-                                );
+                            $save_gallery = array(
+                                'stylist_fk' => $record_id,
+                                'image' => $Image1Name,
+                                'added_date' => date('Y-m-d h:i:s A')
+                            );
 
-                                $this->model_stylist->save_photos($save_gallery);
+                            $this->model_stylist->savePhotos($save_gallery);
 
-                            } else {
-                                echo "Sorry, there was an error uploading your file.";
-                            }
 
+                        } else {
+                            echo "Sorry, there was an error uploading your file.";
                         }
 
                     }
-                    //If there are images for gallery
+
+                }
+                //If there are images for gallery
+
 
                 $this->modelAdminLogs->insertLog($logData["editDesc"]);
                 $data["MSG"] = "Record has been updated successfully!";
-
-
             }
-						redirect(HOST_URL . "/" . $folder . "/e");
 
+            redirect(HOST_URL . "/" . $folder . "/e");
         }
 
-        $data["name"]         = stripslashes($data_record->name);
-        $data["contact_no"]         = stripslashes($data_record->contact_no);
-        $data["email"]              = stripslashes($data_record->email);
+        $data["name"]        = stripslashes($data_record->name);
+        $data["contact_no"]  = stripslashes($data_record->contact_no);
+        $data["email"]       = stripslashes($data_record->email);
+        $data["description"] = stripslashes($data_record->description);
+        $data["city"]        = stripslashes($data_record->city);
+        $data["country"]     = stripslashes($data_record->country);
+
         $data["model_region"]          = stripslashes($data_record->model_region);
-        $data["promotes"]          = stripslashes($data_record->promotes);
-        $data["model_info"]          = stripslashes($data_record->model_info);
-        $data["language"]           = stripslashes($data_record->language);
-        $data["description"]        = stripslashes($data_record->description);
-        $data["is_active"]          = stripslashes($data_record->is_active);
-        $data["username"]        = stripslashes($data_record->username);
+        $data["model_gender"]          = stripslashes($data_record->model_gender);
+        $data["model_age"]             = stripslashes($data_record->model_age);
+        $data["model_exp"]             = stripslashes($data_record->model_exp);
+        $data["model_marrital_status"] = stripslashes($data_record->model_marrital_status);
+        $data["model_info"] = stripslashes($data_record->model_info);
+
+        $data["language"]  = stripslashes($data_record->language);
+        $data["is_active"] = stripslashes($data_record->is_active);
 
         //get the image gallery for the model
         $data['gallery'] = $this->model_stylist->getStylistPicsByPk($record_id);
@@ -573,9 +566,8 @@ class Stylist_management extends Admin_Controller
         $data["data_record"] = $data_record;
 
         $data['languages'] = $this->model_stylist->getLanguageByModel($record_id);
-
-        //Get the image gallery for the model
-        $data['gallery'] = $this->model_stylist->getStylistPicsByPk($record_id);
+        //get the image gallery for the model
+        $data['gallery']   = $this->model_stylist->getStylistPicsByPk($record_id);
 
         $this->load->view($this->config->item("admin_folder") . "/template", $data);
     }
@@ -592,13 +584,10 @@ class Stylist_management extends Admin_Controller
         $data["page"]        = $folder . "/delete";
 
         $record_id = $this->uri->segment(3);
-        if (!empty($record_id))
-        {
+        if (!empty($record_id)) {
             $data_list         = $this->modelNameAlias->get_one_record_for_delete($record_id);
             $data["data_list"] = $data_list;
-        }
-        else
-        {
+        } else {
             $id_array          = $_POST['EditBox'];
             $data_list         = $this->modelNameAlias->get_all_records_for_delete($id_array);
             $data["data_list"] = $data_list;
@@ -607,21 +596,16 @@ class Stylist_management extends Admin_Controller
         $data["Error"] = "Y";
         $data["MSG"]   = "Are you sure you want to delete the Record?";
 
-        if ($this->input->post("btnsubmit") == "Delete")
-        {
+        if ($this->input->post("btnsubmit") == "Delete") {
             $EditBox = $_POST["EditBox"];
-            for ($j = 0; $j < count($EditBox); $j++)
-            {
+            for ($j = 0; $j < count($EditBox); $j++) {
                 $data_record = $this->modelNameAlias->get_details($EditBox[$j]);
                 $image_name  = stripslashes($data_record->image1);
-                if (!empty($image_name))
-                {
-                    if (file_exists($this->thumb_up_path . $image_name))
-                    {
+                if (!empty($image_name)) {
+                    if (file_exists($this->thumb_up_path . $image_name)) {
                         unlink($this->thumb_up_path . $image_name);
                     }
-                    if (file_exists($this->image_up_path . $image_name))
-                    {
+                    if (file_exists($this->image_up_path . $image_name)) {
                         unlink($this->image_up_path . $image_name);
                     }
                 }
@@ -635,6 +619,5 @@ class Stylist_management extends Admin_Controller
 
         $this->load->view($this->config->item("admin_folder") . "/template", $data);
     }
-
 
 }

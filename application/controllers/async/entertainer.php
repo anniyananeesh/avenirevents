@@ -49,6 +49,7 @@ class Entertainer extends CI_Controller
         @$model_region = $request->model_region;
         @$model_age = $request->model_age;
         @$model_spl = $request->model_spl;
+        @$model_spl_other = $request->model_spl_other;
         @$model_gender = $request->model_gender;
         @$model_marrital_status = $request->model_marrital_status;
         @$model_exp = $request->model_exp;
@@ -78,7 +79,8 @@ class Entertainer extends CI_Controller
                 $this->table . '.city' => @$city,
                 $this->table . '.country' => @$country,
                 $this->table . '.model_region' => @$model_region,
-                $this->table . '.model_spl' => @$model_spl,
+                $this->table . '.model_spl' => serialize(@$model_spl),
+                $this->table . '.model_spl_other' => @$model_spl_other,
                 $this->table . '.model_gender' => @$model_gender,
                 $this->table . '.model_exp' => @$model_exp,
                 $this->table . '.model_marrital_status' => @$model_marrital_status,
@@ -96,20 +98,20 @@ class Entertainer extends CI_Controller
             }
 
             if ($id) {
-                /*//Send an invitation email to registered user
+                //Send an invitation email to registered user
                 $this->load->library('email');
                 $this->config->load('email', true);
                 $this->email->from('info@avenirevents.com', 'Avenir Events');
                 $this->email->to(@$email);
                 $this->email->subject('Welcome to Avenir Events.com. Thanks for registering with us!');
 
-                $full_name = @$first_name.' '.@$last_name;
+                $full_name = @$name;
                 $email = @$email;
-                $phone = @$contact_no;
+                $phone = @$phone;
 
                 $notify = array(
-                'full_name' => $full_name,
-                'email' => $email
+                  'full_name' => $full_name,
+                  'email' => $email
                 );
 
                 include_once(MISC_PATH . "/emails.php");
@@ -118,9 +120,6 @@ class Entertainer extends CI_Controller
                 //Send email
                 $this->email->message($message);
                 $this->email->send();
-
-                //Send a notify email to administrator email
-                $this->send_notification($notify);*/
 
                 $data = array(
                     'error' => FALSE,

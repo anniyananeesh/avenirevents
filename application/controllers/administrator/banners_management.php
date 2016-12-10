@@ -134,9 +134,7 @@
 					if ($uploadstatus != "Error"){
 						$orderbyID = $this->modelNameAlias->lastOrderID();
 						$data_array = array(
-							"title_en"		=>		mysql_real_escape_string($title_en),
-              "title_ar"		=>		mysql_real_escape_string($title_ar),
-							"title_fr"		=>		mysql_real_escape_string($title_fr),
+							"title_en"		=>	  $title_en,
 							"image1"			=>		mysql_real_escape_string($Image1Name),
 							"orderby"			=>		mysql_real_escape_string($orderbyID->orderby+1),
 							"is_active"			=>		mysql_real_escape_string($is_active),
@@ -227,9 +225,7 @@
 
 					if ($uploadstatus != "Error"){
 						$data_array = array(
-							"title_en"		=>		mysql_real_escape_string($title_en),
-              "title_ar"		=>		mysql_real_escape_string($title_ar),
-							"title_fr"		=>		mysql_real_escape_string($title_fr),
+							"title_en"		=>	  $title_en,
               "image1"			=>		mysql_real_escape_string($Image1Name),
 							"is_active"			=>		mysql_real_escape_string($is_active)
 						);

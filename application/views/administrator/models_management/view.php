@@ -29,8 +29,28 @@
 				<div class="col-contents">
 
 
-                	<div class="fieldTitle"><strong>Name : </strong></div>
+	        <div class="fieldTitle"><strong>Name : </strong></div>
 					<div><?php echo $data_record->name;?></div>
+					<div class="spacer">&nbsp;</div>
+
+					<div class="fieldTitle"><strong>Age : </strong></div>
+					<div><?php echo $data_record->model_age;?></div>
+					<div class="spacer">&nbsp;</div>
+
+					<div class="fieldTitle"><strong>Model Level : </strong></div>
+					<div><?php echo ucfirst($data_record->model_info);?></div>
+					<div class="spacer">&nbsp;</div>
+
+					<div class="fieldTitle"><strong>Model region : </strong></div>
+					<div><?php echo ucfirst($data_record->model_region);?></div>
+					<div class="spacer">&nbsp;</div>
+
+					<div class="fieldTitle"><strong>Gender : </strong></div>
+					<div><?php echo ucfirst($data_record->model_gender);?></div>
+					<div class="spacer">&nbsp;</div>
+
+					<div class="fieldTitle"><strong>Marrital status : </strong></div>
+					<div><?php echo ucfirst($data_record->model_marrital_status);?></div>
 					<div class="spacer">&nbsp;</div>
 
 					<div class="fieldTitle"><strong>Contact No. : </strong></div>
@@ -41,7 +61,17 @@
 					<div><?php echo $data_record->email;?></div>
 					<div class="spacer">&nbsp;</div>
 
+					<div class="fieldTitle"><strong>City : </strong></div>
+					<div><?php echo ucfirst($data_record->city);?></div>
+					<div class="spacer">&nbsp;</div>
 
+					<div class="fieldTitle"><strong>Country : </strong></div>
+					<div><?php echo $data_record->country;?></div>
+					<div class="spacer">&nbsp;</div>
+
+					<div class="fieldTitle"><strong>Experience : </strong></div>
+					<div><?php echo $data_record->model_exp;?></div>
+					<div class="spacer">&nbsp;</div>
 
 					<?php
 						if($languages)
@@ -104,19 +134,7 @@
 			</div>
 			<div class="rigth-colum">
 				<div class="col-contents">
-
-					<!-- ********** Options SECTION ********** -->
-					<div id="options-header">
-						<div class="options_title">Account</div>
-					</div>
-					<div class="box">
-						<div class="spacer">&nbsp;</div>
-						<div class="fieldTitle"><strong>Username: </strong></div>
-						<div><?php echo $data_record->username;?></div>
-						<div class="spacer">&nbsp;</div>
-					</div>
-					<!-- ********** IMAGES SECTION ********** -->
-
+  
 					<!-- ********** Options SECTION ********** -->
 					<div id="options-header">
 						<div class="options_title">Options</div>

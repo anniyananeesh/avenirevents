@@ -32,9 +32,6 @@
 				<div class="col-contents">
 					<div class="fieldTitle">Heading : </div>
 					<div><?php echo form_input('heading_en',$heading_en, 'id="heading_en" class="textBox required"'); ?></div>
-					<div class="spacer">&nbsp;</div> 
-					<div class="fieldTitle">URL: </div>
-					<div><?php echo form_input('link',$link, 'id="link" class="textBox required"'); ?></div>
 					<div class="spacer">&nbsp;</div>
 
 				</div>

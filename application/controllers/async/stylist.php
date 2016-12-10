@@ -98,16 +98,16 @@ class Stylist extends CI_Controller
 
             if($id)
             {
-                /*//Send an invitation email to registered user
+                //Send an invitation email to registered user
                 $this->load->library('email');
                 $this->config->load('email', true);
                 $this->email->from('info@avenirevents.com', 'Avenir Events');
                 $this->email->to(@$email);
                 $this->email->subject('Welcome to Avenir Events.com. Thanks for registering with us!');
 
-                $full_name = @$first_name.' '.@$last_name;
+                $full_name = @$name;
                 $email = @$email;
-                $phone = @$contact_no;
+                $phone = @$phone;
 
                 $notify = array(
                     'full_name' => $full_name,
@@ -120,9 +120,6 @@ class Stylist extends CI_Controller
                 //Send email
                 $this->email->message($message);
                 $this->email->send();
-
-                //Send a notify email to administrator email
-                $this->send_notification($notify);*/
 
                 $data = array(
                     'error' => FALSE,
@@ -158,7 +155,7 @@ class Stylist extends CI_Controller
 
         @$id = $request->id;
         @$file = $request->file;
- 
+
         $save = array(
            $this->table.'.cv_path' => $file,
         );

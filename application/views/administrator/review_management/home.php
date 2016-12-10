@@ -83,8 +83,7 @@
 						<td align="left" valign="middle"><table width="100%" border="0" cellspacing="0" cellpadding="0">
 						<tr>
 							<td width="50%" align="left" valign="middle"><a href="<?=HOST_URL?>/<?=$folder_name?>/index/sort/heading_en/by/<?=$sortby?><?=$urlparams?>/offset/<?=$offset?>" class="listHeading">Name (English) </a> <img src="<?=ADMIN_IMG_PATH?>/<?php echo ((isset($sort_heading_en))?$sort_heading_en:"sort_empty.png"); ?>" align="absmiddle" class="sort_image"/></td>
-                            <td align="left" valign="middle"><a href="<?=HOST_URL?>/<?=$folder_name?>/index/sort/heading_ar/by/<?=$sortby?><?=$urlparams?>/offset/<?=$offset?>" class="listHeading">Name (Arabic) </a> <img src="<?=ADMIN_IMG_PATH?>/<?php echo ((isset($sort_heading_ar))?$sort_heading_ar:"sort_empty.png"); ?>" align="absmiddle" class="sort_image"/></td>
-						</tr>
+ 						</tr>
 						</table></td>
 						<td width="60" align="center" valign="middle">Image</td>
 						<td width="100" align="center" valign="middle"><a href="<?=HOST_URL?>/<?=$folder_name?>/index/sort/orderby/by/<?=$sortby?><?=$urlparams?>/offset/<?=$offset?>" class="listHeading">Order</a> <img src="<?=ADMIN_IMG_PATH?>/filesave.png" align="absmiddle" border="0" onclick="submitOrderOnly();" style="cursor:pointer;" title="Save Order" /></td>
@@ -121,8 +120,7 @@
 						<td align="left" valign="middle"><table width="100%" border="0" cellspacing="0" cellpadding="0">
 							<tr>
 								<td width="50%" align="left" valign="middle"><a href="<?=HOST_URL?>/<?=$folder_name?>/view/<? echo $value->id; ?>" title="Click to view details" class="listLink"><? echo $value->heading_en; ?></a></td>
-                                <td align="left" valign="middle" class="arabic"><? echo $value->heading_ar; ?></td>
-							</tr>
+ 							</tr>
 						</table></td>
 						<td width="60" align="center" valign="middle"><img src="<?=$image_path?>" width="35" class="thumb" border="0" /></td>
 						<td width="100" align="center" valign="middle"><input type="text" name="orderby[]" id="orderby[]" style="width:30px;text-align:center" class="index_list" value="<?php echo $value->orderby; ?>" tabindex="<?php echo $key; ?>" /><input type="hidden" name="idarray[]" id="idarray[]" value="<?php echo $value->id; ?>" /></td>
