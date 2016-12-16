@@ -48,7 +48,7 @@ class Model extends CI_Controller
         @$model_region = $request->model_region;
         @$model_age = $request->model_age;
         @$model_info = $request->model_info;
-        @$model_gender = $request->model_gender;
+        @$model_spl = $request->model_spl;
         @$model_marrital_status = $request->model_marrital_status;
         @$model_exp = $request->model_exp;
 
@@ -90,7 +90,7 @@ class Model extends CI_Controller
                $this->table.'.shoe_size' => @$shoe_size,
                $this->table.'.pant_size' => @$pant_size,
                $this->table.'.model_region' => @$model_region,
-               $this->table.'.model_gender' => @$model_gender,
+               $this->table.'.model_spl' => serialize(@$model_spl),
                $this->table.'.model_info' => @$model_info,
                $this->table.'.model_exp' => @$model_exp,
                $this->table.'.model_marrital_status' => @$model_marrital_status,

@@ -463,7 +463,19 @@ box-shadow: -15px 9px 14px -6px rgba(0,0,0,0.34);
 
 @media screen and (max-width: 450px) {
 
-
+  .btn-footer {
+    font-size:12px;
+  }
+  .btn-footer2 {
+    font-size:12px;
+  }
+  .btn-footer3 {
+    font-size:12px;
+  }
+  .btn-footer4 {
+    font-size:12px;
+  }
+  
 	.menu.active {
 		right:-35%;
 

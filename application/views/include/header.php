@@ -90,8 +90,9 @@
             <li><a href="<?php echo HOST_URL?>/<?php echo $lan?>/#work" class="smoothScroll"><?php echo lang("auto.event_portfolio")?></a></li>
             <li><a href="<?php echo HOST_URL?>/<?php echo $lan?>/#client" class="smoothScroll"><?php echo lang("auto.our_clients")?></a></li>
             <li><a href="<?php echo HOST_URL?>/<?php echo $lan?>/#contact "class="smoothScroll"><?php echo lang("auto.contact_us")?></a></li>
+            <li><a href="<?php echo HOST_URL?>/<?php echo $lan?>/register"><?php echo lang("auto.register")?></a></li>
             <!-- <li> <a href="<?php echo HOST_URL?>/<?php echo $lan?>/login"><?php echo lang("auto.login")?></a></li>
-            <li><a href="<?php echo HOST_URL?>/<?php echo $lan?>/register"><?php echo lang("auto.register")?></a></li>-->
+            -->
             <lI>
              <ul class="res_social">
                 <h4><?php echo lang("auto.follow_us_on")?></h4>
@@ -108,8 +109,8 @@
                     <li><a href="<?php echo prep_url($data_title->instagram); ?>" target="_blank"><img src="<?php echo IMG_PATH?>/assets/social3.png"/></a></li>
                 <?php endif;?>
 
-                <?php if (!empty($data_title->pinterest)):?>
-                    <li><a href="<?php echo prep_url($data_title->pinterest); ?>" target="_blank"><img src="<?php echo IMG_PATH?>/assets/social4.png"/></a></li>
+                <?php if (!empty($data_title->linkedin)):?>
+                    <li><a href="<?php echo prep_url($data_title->linkedin); ?>" target="_blank"><img src="<?php echo IMG_PATH?>/assets/social4.png"/></a></li>
                 <?php endif;?>
 
     		 </ul>
@@ -140,8 +141,8 @@
                       <li><a href="<?php echo prep_url($data_title->instagram); ?>" target="_blank"><img src="<?php echo IMG_PATH?>/assets/social3.png"/></a></li>
                   <?php endif;?>
 
-                  <?php if (!empty($data_title->pinterest)):?>
-                      <li><a href="<?php echo prep_url($data_title->pinterest); ?>" target="_blank"><img src="<?php echo IMG_PATH?>/assets/social4.png"/></a></li>
+                  <?php if (!empty($data_title->linkedin)):?>
+                      <li><a href="<?php echo prep_url($data_title->linkedin); ?>" target="_blank"><img src="<?php echo IMG_PATH?>/assets/social4.png"/></a></li>
                   <?php endif;?>
                 </ul>
                 <ul>

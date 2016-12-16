@@ -10,6 +10,12 @@
 		    	placeholder: 'Choose',
 		     	csvDispCount: 2
 			});
+
+			$("#model_spl").SumoSelect({
+		    	placeholder: 'Choose',
+		     	csvDispCount: 2
+			});
+			
 		});
 </script>
 
@@ -68,8 +74,7 @@
  							<option value="celebrity" <?php echo ("celebrity" == $model_info) ? 'selected':'';?>>Celebrity</option>
 							<option value="national" <?php echo ("national" == $model_info) ? 'selected':'';?>>National</option>
 							<option value="new_face" <?php echo ("new_face" == $model_info) ? 'selected':'';?>>New Face</option>
-							<option value="fashion" <?php echo ("fashion" == $model_info) ? 'selected':'';?>>Fashion</option>
-							<option value="bikini" <?php echo ("bikini" == $model_info) ? 'selected':'';?>>Bikini</option>
+
 						</select>
 					</div>
 					<div class="spacer">&nbsp;</div>
@@ -78,14 +83,14 @@
 					<div>
 						<select name="model_region" id="model_region" class="textBox required">
 							<option value="">Choose</option>
- 							<option value="arabic" <?php echo ("arabic" == $model_region) ? 'selected':'';?>>Arabic</option>
- 							<option value="meditaranian" <?php echo ("meditaranian" == $model_region) ? 'selected':'';?>>Meditaranian</option>
-							<option value="oriental" <?php echo ("oriental" == $model_region) ? 'selected':'';?>>Oriental</option>
-							<option value="indian" <?php echo ("indian" == $model_region) ? 'selected':'';?>>Indian</option>
-							<option value="european" <?php echo ("european" == $model_region) ? 'selected':'';?>>European</option>
 							<option value="african" <?php echo ("african" == $model_region) ? 'selected':'';?>>African</option>
-
-						</select>
+ 							<option value="arabic" <?php echo ("arabic" == $model_region) ? 'selected':'';?>>Arabic</option>
+							<option value="asian" <?php echo ("asian" == $model_region) ? 'selected':'';?>>Asian</option>
+							<option value="european_caucasian" <?php echo ("european_caucasian" == $model_region) ? 'selected':'';?>>European/Caucasian</option>
+							<option value="indian_south_asian" <?php echo ("indian_south_asian" == $model_region) ? 'selected':'';?>>Indian/South Asian</option>
+							<option value="latino" <?php echo ("latino" == $model_region) ? 'selected':'';?>>Latino</option>
+ 							<option value="meditaranian" <?php echo ("meditaranian" == $model_region) ? 'selected':'';?>>Meditaranian</option>
+					  </select>
 					</div>
 					<div class="spacer">&nbsp;</div>
 
@@ -98,13 +103,28 @@
 						</select>
 					</div>
 					<div class="spacer">&nbsp;</div>
-
-					<div class="fieldTitle">Marrital Status: </div>
+					<div class="fieldTitle">Specialization: </div>
 					<div>
-						<select name="model_marrital_status" id="model_marrital_status" class="textBox required">
-							<option value="">Choose</option>
- 							<option value="married" <?php echo ("married" == $model_marrital_status) ? 'selected':'';?>>Married</option>
- 							<option value="single" <?php echo ("single" == $model_marrital_status) ? 'selected':'';?>>Single</option>
+						<select name="model_spl[]" multiple id="model_spl" class="textBox required">
+
+							<option value="Fashion" <?php echo (is_array($model_spl) && in_array("Fashion", $model_spl)) ? 'selected':'';?>>Fashion</option>
+							<option value="Runway" <?php echo (is_array($model_spl) && in_array("Runway", $model_spl)) ? 'selected':'';?>>Runway</option>
+							<option value="Catalog" <?php echo (is_array($model_spl) && in_array("Catalog", $model_spl)) ? 'selected':'';?>>Catalog</option>
+							<option value="Editorial" <?php echo (is_array($model_spl) && in_array("Editorial", $model_spl)) ? 'selected':'';?>>Editorial</option>
+							<option value="Fit Model" <?php echo (is_array($model_spl) && in_array("Fit Model", $model_spl)) ? 'selected':'';?>>Fit Model</option>
+							<option value="Spokesmodel" <?php echo (is_array($model_spl) && in_array("Spokesmodel", $model_spl)) ? 'selected':'';?>>Spokesmodel</option>
+							<option value="Commercial & Print" <?php echo (is_array($model_spl) && in_array("Commercial & Print", $model_spl)) ? 'selected':'';?>>Commercial & Print</option>
+							<option value="Swimwear" <?php echo (is_array($model_spl) && in_array("Swimwear", $model_spl)) ? 'selected':'';?>>Swimwear</option>
+							<option value="Fitness" <?php echo (is_array($model_spl) && in_array("Fitness", $model_spl)) ? 'selected':'';?>>Fitness</option>
+							<option value="Lingerie" <?php echo (is_array($model_spl) && in_array("Lingerie", $model_spl)) ? 'selected':'';?>>Lingerie</option>
+							<option value="Glamour" <?php echo (is_array($model_spl) && in_array("Glamour", $model_spl)) ? 'selected':'';?>>Glamour</option>
+							<option value="Alternative" <?php echo (is_array($model_spl) && in_array("Alternative", $model_spl)) ? 'selected':'';?>>Alternative</option>
+							<option value="Nude" <?php echo (is_array($model_spl) && in_array("Nude", $model_spl)) ? 'selected':'';?>>Nude</option>
+							<option value="Hair" <?php echo (is_array($model_spl) && in_array("Hair", $model_spl)) ? 'selected':'';?>>Hair</option>
+							<option value="Legs & Feet" <?php echo (is_array($model_spl) && in_array("Legs & Feet", $model_spl)) ? 'selected':'';?>>Legs & Feet</option>
+							<option value="Hands" <?php echo (is_array($model_spl) && in_array("Hands", $model_spl)) ? 'selected':'';?>>Hands</option>
+							<option value="Acting / Commercials" <?php echo (is_array($model_spl) && in_array("Acting / Commercials", $model_spl)) ? 'selected':'';?>>Acting / Commercials</option>
+
 						</select>
 					</div>
 					<div class="spacer">&nbsp;</div>

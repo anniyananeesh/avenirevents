@@ -12,7 +12,7 @@
                     </ul>
                 </div>
                 <div class="col-lg-4 col-sm-6">
-                	<h1><?php echo lang("auto.connect_us")?></h1>
+                	<h1><?php echo lang("auto.contact_us")?></h1>
 
                     <ul class="connect">
                     	<li><img src="<?php echo IMG_PATH?>/assets/phone.png" ><?php echo $data_title->cn_phone?></li>

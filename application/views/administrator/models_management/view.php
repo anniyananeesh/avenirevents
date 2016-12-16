@@ -45,13 +45,9 @@
 					<div><?php echo ucfirst($data_record->model_region);?></div>
 					<div class="spacer">&nbsp;</div>
 
-					<div class="fieldTitle"><strong>Gender : </strong></div>
+					<div class="fieldTitle"><strong>Model Specialization : </strong></div>
 					<div><?php echo ucfirst($data_record->model_gender);?></div>
-					<div class="spacer">&nbsp;</div>
-
-					<div class="fieldTitle"><strong>Marrital status : </strong></div>
-					<div><?php echo ucfirst($data_record->model_marrital_status);?></div>
-					<div class="spacer">&nbsp;</div>
+					<div class="spacer">&nbsp;</div> 
 
 					<div class="fieldTitle"><strong>Contact No. : </strong></div>
 					<div><?php echo $data_record->contact_no;?></div>
@@ -134,7 +130,7 @@
 			</div>
 			<div class="rigth-colum">
 				<div class="col-contents">
-  
+
 					<!-- ********** Options SECTION ********** -->
 					<div id="options-header">
 						<div class="options_title">Options</div>

@@ -156,7 +156,7 @@ class Models_management extends Admin_Controller
             $model_info   = $this->input->post("model_info", TRUE);
             $model_gender = $this->input->post("model_gender", TRUE);
             $model_age   = $this->input->post("model_age", TRUE);
-            $model_marrital_status   = $this->input->post("model_marrital_status", TRUE);
+            $model_spl   = $this->input->post("model_spl", TRUE);
             $model_exp    = $this->input->post("model_exp", TRUE);
 
             $is_active    = $this->input->post("is_active", TRUE);
@@ -243,7 +243,7 @@ class Models_management extends Admin_Controller
                             "model_gender" => mysql_real_escape_string($model_gender),
                             "model_age" => mysql_real_escape_string($model_age),
                             "model_exp" => mysql_real_escape_string($model_exp),
-                            "model_marrital_status" => mysql_real_escape_string($model_marrital_status),
+                            "model_spl" => serialize($model_spl),
 
                             "cv_path" => mysql_real_escape_string($CvName),
                             "orderby" => mysql_real_escape_string($orderbyID->orderby + 1),
@@ -332,7 +332,7 @@ class Models_management extends Admin_Controller
                         $data["model_gender"]    = "";
                         $data["model_age"]    = "";
                         $data["model_exp"]    = "";
-                        $data["model_marrital_status"]    = "";
+                        $data["model_spl"]    = "";
 
 
                     }
@@ -371,7 +371,7 @@ class Models_management extends Admin_Controller
                 $data["model_gender"]    = $model_gender;
                 $data["model_age"]    = $model_age;
                 $data["model_exp"]    = $model_exp;
-                $data["model_marrital_status"]    = $model_marrital_status;
+                $data["model_spl"]    = $model_spl;
 
             }
 
@@ -465,7 +465,7 @@ class Models_management extends Admin_Controller
             $model_info   = $this->input->post("model_info", TRUE);
             $model_gender = $this->input->post("model_gender", TRUE);
             $model_age   = $this->input->post("model_age", TRUE);
-            $model_marrital_status   = $this->input->post("model_marrital_status", TRUE);
+            $model_spl   = $this->input->post("model_spl", TRUE);
             $model_exp    = $this->input->post("model_exp", TRUE);
 
             $is_active    = $this->input->post("is_active", TRUE);
@@ -523,7 +523,7 @@ class Models_management extends Admin_Controller
                     "model_gender" => mysql_real_escape_string($model_gender),
                     "model_age" => mysql_real_escape_string($model_age),
                     "model_exp" => mysql_real_escape_string($model_exp),
-                    "model_marrital_status" => mysql_real_escape_string($model_marrital_status),
+                    "model_spl" => serialize($model_spl),
                     "cv_path" => mysql_real_escape_string($CvName),
                     "is_active" => mysql_real_escape_string($is_active)
                 );
@@ -615,7 +615,7 @@ class Models_management extends Admin_Controller
         $data["model_gender"]       = stripslashes($data_record->model_gender);
         $data["model_age"]       = stripslashes($data_record->model_age);
         $data["model_exp"]       = stripslashes($data_record->model_exp);
-        $data["model_marrital_status"]       = stripslashes($data_record->model_marrital_status);
+        $data["model_spl"]       = unserialize($data_record->model_spl);
 
         $data["language"]     = stripslashes($data_record->language);
         $data["is_active"]    = stripslashes($data_record->is_active);

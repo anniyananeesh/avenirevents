@@ -73,7 +73,6 @@
 					<div>
 						<select name="model_info" id="model_info" class="textBox required">
 							<option value="">Choose</option>
-							<option value="">Choose</option>
  							<option value="professional" <?php echo ("professional" == $model_info) ? 'selected':'';?>>Professional</option>
  							<option value="non_professional" <?php echo ("non_professional" == $model_info) ? 'selected':'';?>>Non professional</option>
 
@@ -116,12 +115,13 @@
 					<div>
 						<select name="model_region" id="model_region" class="textBox required">
 							<option value="">Choose</option>
- 							<option value="arabic" <?php echo ("arabic" == $model_region) ? 'selected':'';?>>Arabic</option>
- 							<option value="meditaranian" <?php echo ("meditaranian" == $model_region) ? 'selected':'';?>>Meditaranian</option>
-							<option value="oriental" <?php echo ("oriental" == $model_region) ? 'selected':'';?>>Oriental</option>
-							<option value="indian" <?php echo ("indian" == $model_region) ? 'selected':'';?>>Indian</option>
-							<option value="european" <?php echo ("european" == $model_region) ? 'selected':'';?>>European</option>
 							<option value="african" <?php echo ("african" == $model_region) ? 'selected':'';?>>African</option>
+ 							<option value="arabic" <?php echo ("arabic" == $model_region) ? 'selected':'';?>>Arabic</option>
+							<option value="asian" <?php echo ("asian" == $model_region) ? 'selected':'';?>>Asian</option>
+							<option value="european_caucasian" <?php echo ("european_caucasian" == $model_region) ? 'selected':'';?>>European/Caucasian</option>
+							<option value="indian_south_asian" <?php echo ("indian_south_asian" == $model_region) ? 'selected':'';?>>Indian/South Asian</option>
+							<option value="latino" <?php echo ("latino" == $model_region) ? 'selected':'';?>>Latino</option>
+ 							<option value="meditaranian" <?php echo ("meditaranian" == $model_region) ? 'selected':'';?>>Meditaranian</option>
 
 						</select>
 					</div>

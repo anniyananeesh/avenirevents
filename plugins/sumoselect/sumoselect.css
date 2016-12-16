@@ -5,9 +5,10 @@
 
     .SumoSelect > .optWrapper > .options > li label, .SumoSelect > .CaptionCont { user-select: none; -o-user-select: none; -moz-user-select: none; -khtml-user-select: none; -webkit-user-select: none; }
 
-.SumoSelect { display: inline-block; position: relative;outline:none;}
+.SumoSelect { display: block; position: relative;outline:none; width: 100%;}
 .SumoSelect:focus > .CaptionCont,.SumoSelect:hover > .CaptionCont {/*box-shadow: 0px 0px 2px #7799D0;*/ border-color: #935326;}
     .SumoSelect > .CaptionCont { position: relative;
+      width: 100%;
     border: 1px solid #A4A4A4;
     min-height: 19px;
     background-color: #fff;

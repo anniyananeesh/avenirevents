@@ -74,6 +74,9 @@ myApp.controller('SignupCtrl',function($scope, $http, $window) {
 				weddings: 'NO',
 				private_events: 'NO',
         gala_dinner: 'NO',
+				tobacco: 'NO',
+				alcohol: 'NO',
+
 		}
   };
 
@@ -333,6 +336,7 @@ myApp.controller('SignupCtrl',function($scope, $http, $window) {
                 <div class="col-md-6 <?php echo ($lan == 'ar') ? 'pull-right' : 'pull-left';?>">
 
 									<h3>Promotor Details</h3>
+									<div class="clearfix"></div>
 
                                     <div class="form-group">
                                         <label class="control-label">Level</label><br>
@@ -345,9 +349,6 @@ myApp.controller('SignupCtrl',function($scope, $http, $window) {
                                           </label>
                                           <label class="radio-inline">
                                             <input type="radio"  name="model_info" value="new_face" ng-checked="user.model_info == 'new_face'" ng-click="user.model_info = 'new_face'"> New Face
-                                          </label>
-                                           <label class="radio-inline">
-                                            <input type="radio"  name="model_info" value="hands_feet" ng-checked="user.model_info == 'hands_feet'" ng-click="user.model_info = 'hands_feet'"> Hands & Feet
                                           </label>
 
                                     </div>
@@ -380,30 +381,46 @@ myApp.controller('SignupCtrl',function($scope, $http, $window) {
                                                       <input type="checkbox"  name="model_pref" value="gala_dinner" ng-model="user.checkbox_model.gala_dinner" ng-true-value="'YES'" ng-false-value="'NO'"> Gala Dinner
                                                     </label>
 
+																										<label class="selct_chk">
+                                                      <input type="checkbox"  name="model_pref" value="tobacco" ng-model="user.checkbox_model.tobacco" ng-true-value="'YES'" ng-false-value="'NO'"> Tobacco
+                                                    </label>
+
+																										<label class="selct_chk">
+                                                      <input type="checkbox"  name="model_pref" value="alcohol" ng-model="user.checkbox_model.alcohol" ng-true-value="'YES'" ng-false-value="'NO'"> Alcohol
+                                                    </label>
+
                                                 </div>
 
                                     <div class="form-group">
                                         <label class="control-label"><?php echo lang("auto.region")?></label> <br>
 
-                                      <label class="radio-inline">
-                                          <input type="radio"  name="model_region" value="arabic" ng-checked="user.model_region == 'arabic'" ng-click="user.model_region = 'arabic'"> <?php echo lang("auto.arabic")?>
-                                        </label>
-                                        <label class="radio-inline">
-                                          <input type="radio"  name="model_region" value="meditaranian" ng-checked="user.model_region == 'meditaranian'" ng-click="user.model_region = 'meditaranian'"> <?php echo lang("auto.meditaranian")?>
-                                        </label>
-                                        <label class="radio-inline">
-                                          <input type="radio"  name="model_region" value="oriental" ng-checked="user.model_region == 'oriental'" ng-click="user.model_region = 'oriental'"> <?php echo lang("auto.oriental")?>
-                                        </label>
-                                        <label class="radio-inline">
-                                          <input type="radio"  name="model_region" value="indian" ng-checked="user.model_region == 'indian'" ng-click="user.model_region = 'indian'"> <?php echo lang("auto.indian")?>
-                                        </label>
-                                        <label class="radio-inline">
-                                          <input type="radio"  name="model_region" value="europian" ng-checked="user.model_region == 'europian'" ng-click="user.model_region = 'europian'"> <?php echo lang("auto.european")?>
-                                        </label>
+																				<label class="radio-inline">
+																					<input type="radio"  name="model_region" value="african" ng-checked="user.model_region == 'african'" ng-click="user.model_region = 'african'"> African
+																				</label>
 
-                                        <label class="radio-inline">
-                                          <input type="radio"  name="model_region" value="african" ng-checked="user.model_region == 'african'" ng-click="user.model_region = 'african'"> African
-                                        </label>
+																			<label class="radio-inline">
+																					<input type="radio"  name="model_region" value="arabic" ng-checked="user.model_region == 'arabic'" ng-click="user.model_region = 'arabic'"> <?php echo lang("auto.arabic")?>
+																				</label>
+
+																				<label class="radio-inline">
+																					<input type="radio"  name="model_region" value="asian" ng-checked="user.model_region == 'asian'" ng-click="user.model_region = 'asian'"> Asian
+																				</label>
+
+																				<label class="radio-inline">
+																					<input type="radio"  name="model_region" value="europian" ng-checked="user.model_region == 'europian'" ng-click="user.model_region = 'europian'"> <?php echo lang("auto.european")?> / Caucasian
+																				</label>
+
+																				<label class="radio-inline">
+																					<input type="radio"  name="model_region" value="indian_south_asian" ng-checked="user.model_region == 'indian_south_asian'" ng-click="user.model_region = 'indian_south_asian'"> Indian/South Asian
+																				</label>
+
+																				<label class="radio-inline">
+																					<input type="radio"  name="model_region" value="latino" ng-checked="user.model_region == 'latino'" ng-click="user.model_region = 'latino'"> Latino
+																				</label>
+
+																				<label class="radio-inline">
+																					<input type="radio"  name="model_region" value="meditaranian" ng-checked="user.model_region == 'meditaranian'" ng-click="user.model_region = 'meditaranian'"> <?php echo lang("auto.meditaranian")?>
+																				</label>
 
                                     </div>
 
@@ -446,7 +463,7 @@ myApp.controller('SignupCtrl',function($scope, $http, $window) {
                                     <div class="clearfix"></div>
                                       <Label>Languages</label>
                                     <div class="form-group">
-                                    <select name="language" id="language"  multiple style="width: 300px;"  class="form-control" ng-model="user.language" ng-class="{ 'has-error' : signupFrm.language.$invalid && !signupFrm.language.$pristine }" required>
+                                    <select name="language" id="language"  multiple class="form-control" ng-model="user.language" ng-class="{ 'has-error' : signupFrm.language.$invalid && !signupFrm.language.$pristine }" required>
                                       <?php foreach($languages AS $lang):?>
                                         <option value="<?php echo $lang->id;?>"><?php echo $lang->name_en;?></option>
                                       <?php endforeach;?>

@@ -16,6 +16,11 @@ $(function(){
      	csvDispCount: 3
 	});
 
+	$("#model_spl").SumoSelect({
+    	placeholder: 'Choose',
+     	csvDispCount: 3
+	});
+
 });
 
 function doRemoveThumb()
@@ -58,11 +63,11 @@ myApp.controller('SignupCtrl',function($scope, $http, $window) {
     hip: '',
 
     model_region: 'arabic',
-    model_marrital_status: 'married',
     model_gender: 'male',
     model_info: 'international',
     model_age: 'below_6',
     model_exp: '',
+		model_spl: [],
     city: '',
     country: 'AE',
   };
@@ -210,8 +215,8 @@ myApp.controller('SignupCtrl',function($scope, $http, $window) {
       model_gender: $scope.user.model_gender,
       model_age: $scope.user.model_age,
       model_exp: $scope.user.model_exp,
-      model_marrital_status: $scope.user.model_marrital_status,
       model_info: $scope.user.model_info,
+			model_spl: $scope.user.model_spl,
       <?php echo $this->security->get_csrf_token_name(); ?>: '<?php echo $this->security->get_csrf_hash(); ?>',
 
 		};
@@ -338,36 +343,38 @@ myApp.controller('SignupCtrl',function($scope, $http, $window) {
                                         <label class="radio-inline">
                                           <input type="radio"  name="model_info" value="new_face" ng-checked="user.model_info == 'new_face'" ng-click="user.model_info = 'new_face'"> New Face
                                         </label>
-                                         <label class="radio-inline">
-                                          <input type="radio"  name="model_info" value="fashion" ng-checked="user.model_info == 'fashion'" ng-click="user.model_info = 'fashion'"> Fashion
-                                        </label>
-                                         <label class="radio-inline">
-                                          <input type="radio"  name="model_info" value="bikini" ng-checked="user.model_info == 'bikini'" ng-click="user.model_info = 'bikini'"> Bikini
-                                        </label>
 
                                     </div>
 
                                     <div class="form-group">
                                         <label class="control-label"><?php echo lang("auto.region")?></label> <br>
 
+																				<label class="radio-inline">
+                                          <input type="radio"  name="model_region" value="african" ng-checked="user.model_region == 'african'" ng-click="user.model_region = 'african'"> African
+                                        </label>
+
                                       <label class="radio-inline">
                                           <input type="radio"  name="model_region" value="arabic" ng-checked="user.model_region == 'arabic'" ng-click="user.model_region = 'arabic'"> <?php echo lang("auto.arabic")?>
                                         </label>
-                                        <label class="radio-inline">
-                                          <input type="radio"  name="model_region" value="meditaranian" ng-checked="user.model_region == 'meditaranian'" ng-click="user.model_region = 'meditaranian'"> <?php echo lang("auto.meditaranian")?>
+
+																				<label class="radio-inline">
+                                          <input type="radio"  name="model_region" value="asian" ng-checked="user.model_region == 'asian'" ng-click="user.model_region = 'asian'"> Asian
                                         </label>
-                                        <label class="radio-inline">
-                                          <input type="radio"  name="model_region" value="oriental" ng-checked="user.model_region == 'oriental'" ng-click="user.model_region = 'oriental'"> <?php echo lang("auto.oriental")?>
+
+																				<label class="radio-inline">
+                                          <input type="radio"  name="model_region" value="europian" ng-checked="user.model_region == 'europian'" ng-click="user.model_region = 'europian'"> <?php echo lang("auto.european")?> / Caucasian
                                         </label>
-                                        <label class="radio-inline">
-                                          <input type="radio"  name="model_region" value="indian" ng-checked="user.model_region == 'indian'" ng-click="user.model_region = 'indian'"> <?php echo lang("auto.indian")?>
-                                        </label>
-                                        <label class="radio-inline">
-                                          <input type="radio"  name="model_region" value="europian" ng-checked="user.model_region == 'europian'" ng-click="user.model_region = 'europian'"> <?php echo lang("auto.european")?>
+
+																				<label class="radio-inline">
+                                          <input type="radio"  name="model_region" value="indian_south_asian" ng-checked="user.model_region == 'indian_south_asian'" ng-click="user.model_region = 'indian_south_asian'"> Indian/South Asian
                                         </label>
 
                                         <label class="radio-inline">
-                                          <input type="radio"  name="model_region" value="african" ng-checked="user.model_region == 'african'" ng-click="user.model_region = 'african'"> African
+                                          <input type="radio"  name="model_region" value="latino" ng-checked="user.model_region == 'latino'" ng-click="user.model_region = 'latino'"> Latino
+                                        </label>
+
+																				<label class="radio-inline">
+                                          <input type="radio"  name="model_region" value="meditaranian" ng-checked="user.model_region == 'meditaranian'" ng-click="user.model_region = 'meditaranian'"> <?php echo lang("auto.meditaranian")?>
                                         </label>
 
                                     </div>
@@ -383,16 +390,7 @@ myApp.controller('SignupCtrl',function($scope, $http, $window) {
                                         </label>
                                     </div>
 
-                                    <div class="form-group">
-                                     <label class="control-label">Marital Status</label> <br>
 
-                                     <label class="radio-inline">
-                                         <input type="radio"  name="model_marrital_status" value="married" ng-checked="user.model_marrital_status == 'married'" ng-click="user.model_marrital_status = 'married'"> Married
-                                       </label>
-                                       <label class="radio-inline">
-                                         <input type="radio"  name="model_marrital_status" value="single" ng-checked="user.model_marrital_status == 'single'" ng-click="user.model_marrital_status = 'single'"> Single
-                                       </label>
-                                   </div>
 
                                    <div class="clearfix"></div>
                                  <label>Age</label>
@@ -411,12 +409,37 @@ myApp.controller('SignupCtrl',function($scope, $http, $window) {
                                     <div class="clearfix"></div>
                                       <Label>Languages</label>
                                     <div class="form-group">
-                                    <select name="language" id="language"  multiple style="width: 300px;"  class="form-control" ng-model="user.language" ng-class="{ 'has-error' : signupFrm.language.$invalid && !signupFrm.language.$pristine }" required>
+                                    <select name="language" id="language"  multiple class="form-control" ng-model="user.language" ng-class="{ 'has-error' : signupFrm.language.$invalid && !signupFrm.language.$pristine }" required>
                                       <?php foreach($languages AS $lang):?>
                                         <option value="<?php echo $lang->id;?>"><?php echo $lang->name_en;?></option>
                                       <?php endforeach;?>
                                     </select>
                   									</div>
+
+																		<div class="form-group">
+									                                  <label class="control-label">Model Type</label> <br>
+
+									                                <select class="form-control" id="model_spl" name="model_spl" multiple ng-model="user.model_spl">
+									                                    <option value="Fashion">Fashion</option>
+									                                    <option value="Runway">Runway</option>
+									                                    <option value="Catalog">Catalog</option>
+									                                    <option value="Editorial">Editorial</option>
+									                                    <option value="Fit Model">Fit Model</option>
+									                                    <option value="Spokesmodel">Spokesmodel</option>
+									                                    <option value="Commercial & Print">Commercial & Print</option>
+									                                    <option value="Swimwear">Swimwear</option>
+									                                    <option value="Fitness">Fitness</option>
+									                                    <option value="Lingerie">Lingerie</option>
+									                                    <option value="Glamour">Glamour</option>
+									                                    <option value="Alternative">Alternative</option>
+									                                    <option value="Nude">Nude</option>
+									                                    <option value="Hair">Hair</option>
+									                                    <option value="Legs & Feet">Legs & Feet</option>
+									                                    <option value="Hands">Hands</option>
+									                                    <option value="Acting / Commercials">Acting / Commercials</option>
+									                                  </select>
+
+									                              </div>
 
                                     <div class="clearfix"></div>
 
