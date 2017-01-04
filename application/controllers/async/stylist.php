@@ -98,28 +98,41 @@ class Stylist extends CI_Controller
 
             if($id)
             {
-                //Send an invitation email to registered user
-                $this->load->library('email');
-                $this->config->load('email', true);
-                $this->email->from('info@avenirevents.com', 'Avenir Events');
-                $this->email->to(@$email);
-                $this->email->subject('Welcome to Avenir Events.com. Thanks for registering with us!');
+                  //Send an invitation email to registered user
+                  $this->load->library('email');
+                  $this->config->load('email', true);
+                  $this->email->from(INFO_EMAIL, SITE_NAME);
+                  $this->email->to(@$email);
+                  $this->email->subject('Welcome to Avenir Events.com. Thanks for registering with us!');
 
-                $full_name = @$name;
-                $email = @$email;
-                $phone = @$phone;
+                  $full_name = @$name;
+                  $email = @$email;
+                  $phone = @$phone;
+                  $type = 'Stylist';
 
-                $notify = array(
-                    'full_name' => $full_name,
-                    'email' => $email
-                );
+                  $notify = array(
+                      'full_name' => $full_name,
+                      'email' => $email
+                  );
 
-                include_once(MISC_PATH . "/emails.php");
-                $message = $registration_email;
+                  include_once(MISC_PATH . "/emails.php");
+                  $message = $registration_email;
 
-                //Send email
-                $this->email->message($message);
-                $this->email->send();
+                  //Send email
+                  $this->email->message($message);
+                  $this->email->send();
+
+                  //Send email to Administrator
+                  $this->email->from($email, $full_name);
+                  $this->email->to(INFO_EMAIL);
+                  $this->email->subject( $type . ' : Someone registered with avenir events');
+
+                  $notify_message = $notify_admin;
+
+                  //Send email
+                  $this->email->message($notify_message);
+                  $this->email->send();
+                  //EOF Administrator notification sending
 
                 $data = array(
                     'error' => FALSE,

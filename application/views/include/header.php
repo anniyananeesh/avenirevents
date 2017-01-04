@@ -105,13 +105,14 @@
                     <li><a href="<?php echo prep_url($data_title->twitter); ?>" target="_blank"><img src="<?php echo IMG_PATH?>/assets/social2.png"/></a></li>
                 <?php endif;?>
 
+                <?php if (!empty($data_title->linkedin)):?>
+                    <li><a href="<?php echo prep_url($data_title->linkedin); ?>" target="_blank"><img src="<?php echo IMG_PATH?>/assets/social4.png"/></a></li>
+                <?php endif;?>
+
                 <?php if (!empty($data_title->instagram)):?>
                     <li><a href="<?php echo prep_url($data_title->instagram); ?>" target="_blank"><img src="<?php echo IMG_PATH?>/assets/social3.png"/></a></li>
                 <?php endif;?>
 
-                <?php if (!empty($data_title->linkedin)):?>
-                    <li><a href="<?php echo prep_url($data_title->linkedin); ?>" target="_blank"><img src="<?php echo IMG_PATH?>/assets/social4.png"/></a></li>
-                <?php endif;?>
 
     		 </ul>
              </lI>
@@ -137,13 +138,15 @@
                       <li><a href="<?php echo prep_url($data_title->twitter); ?>" target="_blank"><img src="<?php echo IMG_PATH?>/assets/social2.png"/></a></li>
                   <?php endif;?>
 
+                  <?php if (!empty($data_title->linkedin)):?>
+                      <li><a href="<?php echo prep_url($data_title->linkedin); ?>" target="_blank"><img src="<?php echo IMG_PATH?>/assets/social4.png"/></a></li>
+                  <?php endif;?>
+
                   <?php if (!empty($data_title->instagram)):?>
                       <li><a href="<?php echo prep_url($data_title->instagram); ?>" target="_blank"><img src="<?php echo IMG_PATH?>/assets/social3.png"/></a></li>
                   <?php endif;?>
 
-                  <?php if (!empty($data_title->linkedin)):?>
-                      <li><a href="<?php echo prep_url($data_title->linkedin); ?>" target="_blank"><img src="<?php echo IMG_PATH?>/assets/social4.png"/></a></li>
-                  <?php endif;?>
+
                 </ul>
                 <ul>
                   <LI class="register"><a href="<?php echo HOST_URL?>/<?php echo $lan?>/register">register with us</a></LI>

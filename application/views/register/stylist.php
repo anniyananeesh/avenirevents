@@ -296,7 +296,7 @@ myApp.controller('SignupCtrl',function($scope, $http, $window) {
 
 							<div class="row">
 
-                <div class="col-md-6 <?php echo ($lan == 'ar') ? 'pull-right' : 'pull-left';?>">
+                <div class="col-md-6">
 
 									<h3>Stylist Details</h3>
 

@@ -28,6 +28,8 @@ class Entertainer extends CI_Controller
         $this->load->model('model_languages', 'modelLangAlias');
         $this->load->model('model_entertainer', 'modelNameAlias');
 
+        $this->load->library('email');
+
     }
 
     public function signup()
@@ -37,6 +39,7 @@ class Entertainer extends CI_Controller
 
         $error = FALSE;
 
+        /**
         @$name = $request->name;
         @$email = $request->email;
         @$phone = $request->phone;
@@ -53,10 +56,11 @@ class Entertainer extends CI_Controller
         @$model_gender = $request->model_gender;
         @$model_marrital_status = $request->model_marrital_status;
         @$model_exp = $request->model_exp;
+        **/
 
-        $code    = $this->modelNameAlias->genUniqCode();
-        $orderby = $this->modelNameAlias->lastOrderID();
-        $orderby = ($orderby->orderby != NULL) ? ++$orderby->orderby : 1;
+        //$code    = $this->modelNameAlias->genUniqCode();
+        //$orderby = $this->modelNameAlias->lastOrderID();
+        //$orderby = ($orderby->orderby != NULL) ? ++$orderby->orderby : 1;
 
         //Username checking
         if ($this->isAlreadyRegistered(@$email)) {
@@ -69,6 +73,7 @@ class Entertainer extends CI_Controller
 
         if (!$error) {
 
+            /**
             $save = array(
                 $this->table . '.orderby' => $orderby,
                 $this->table . '.code' => $code,
@@ -97,41 +102,11 @@ class Entertainer extends CI_Controller
                 $this->modelNameAlias->setLanguage($id, @$language[$i]);
             }
 
+            //
+
             if ($id) {
-                //Send an invitation email to registered user
-                $this->load->library('email');
-                $this->config->load('email', true);
-                $this->email->from('info@avenirevents.com', 'Avenir Events');
-                $this->email->to(@$email);
-                $this->email->subject('Welcome to Avenir Events.com. Thanks for registering with us!');
 
-                $full_name = @$name;
-                $email = @$email;
-                $phone = @$phone;
 
-                $notify = array(
-                  'full_name' => $full_name,
-                  'email' => $email
-                );
-
-                include_once(MISC_PATH . "/emails.php");
-                $message = $registration_email;
-
-                //Send email
-                $this->email->message($message);
-                $this->email->send();
-
-                $data = array(
-                    'error' => FALSE,
-                    'data' => array(
-                        'pkey' => $id,
-                        'code' => $code,
-                        'name' => @$name,
-                        'email' => @$email
-                    ),
-                    'message' => 'account created',
-                    'code' => 200
-                );
 
             } else {
 
@@ -141,6 +116,67 @@ class Entertainer extends CI_Controller
                     'code' => 400
                 );
             }
+            */
+
+            //Send an invitation email to registered user
+            $this->config->load('email', true);
+            $this->email->from(INFO_EMAIL, SITE_NAME);
+            $this->email->to(@$email);
+            $this->email->subject('Welcome to Avenir Events.com. Thanks for registering with us!');
+
+            $full_name = $request->name;
+            $email = $request->email;
+            $phone = $request->phone;
+            $type = 'Entertainer';
+
+            $city = $request->city;
+            $country = $request->country;
+            $description = $request->description;
+            $language = $request->language;
+            $model_region = $request->model_region;
+            $model_age = $request->model_age;
+            $model_spl = $request->model_spl;
+            $model_spl_other = $request->model_spl_other;
+            $model_gender = $request->model_gender;
+            $model_marrital_status = $request->model_marrital_status;
+            $model_exp = $request->model_exp;
+
+            $notify = array(
+              'full_name' => $full_name,
+              'email' => $email
+            );
+
+            include_once(MISC_PATH . "/emails.php");
+            $message = $registration_email;
+
+            //Send email
+            $this->email->message($message);
+            $this->email->send();
+
+
+            //Send email to Administrator
+            $this->email->from($email, $full_name);
+            $this->email->to(INFO_EMAIL);
+            $this->email->subject( $type . ' : Someone registered with avenir events');
+
+            $notify_message = $notify_admin;
+
+            //Send email
+            $this->email->message($notify_message);
+            $this->email->send();
+            //EOF Administrator notification sending
+
+            $data = array(
+                'error' => FALSE,
+                'data' => array(
+                    'pkey' => $id,
+                    'code' => $code,
+                    'name' => @$name,
+                    'email' => @$email
+                ),
+                'message' => 'account created',
+                'code' => 200
+            );
 
         }
 

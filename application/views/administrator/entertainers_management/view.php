@@ -39,11 +39,7 @@
 
 					<div class="fieldTitle"><strong>Level : </strong></div>
 					<div><?php echo $data_record->model_info;?></div>
-					<div class="spacer">&nbsp;</div>
-
-					<div class="fieldTitle"><strong>Model region : </strong></div>
-					<div><?php echo ucfirst($data_record->model_region);?></div>
-					<div class="spacer">&nbsp;</div>
+					<div class="spacer">&nbsp;</div> 
 
 					<div class="fieldTitle"><strong>Gender : </strong></div>
 					<div><?php echo ucfirst($data_record->model_gender);?></div>
@@ -84,7 +80,7 @@
 					<div class="fieldTitle"><strong>Language Spoken : </strong></div>
 					<div><?php echo ($languages) ? implode(',', $langArray): '';?></div>
 					<div class="spacer">&nbsp;</div>
-  
+
  					<div>
 						<div class="fieldTitle"><strong>Description:</strong></div>
 					</div>

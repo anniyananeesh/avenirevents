@@ -114,13 +114,14 @@ class Promoter extends CI_Controller
                 //Send an invitation email to registered user
                 $this->load->library('email');
                 $this->config->load('email', true);
-                $this->email->from('info@avenirevents.com', 'Avenir Events');
+                $this->email->from(INFO_EMAIL, SITE_NAME);
                 $this->email->to(@$email);
                 $this->email->subject('Welcome to Avenir Events.com. Thanks for registering with us!');
 
                 $full_name = @$name;
                 $email = @$email;
                 $phone = @$phone;
+                $type = 'Promoter';
 
                 $notify = array(
                     'full_name' => $full_name,
@@ -132,7 +133,19 @@ class Promoter extends CI_Controller
 
                 //Send email
                 $this->email->message($message);
-                $this->email->send(); 
+                $this->email->send();
+
+                //Send email to Administrator
+                $this->email->from($email, $full_name);
+                $this->email->to(INFO_EMAIL);
+                $this->email->subject( $type . ' : Someone registered with avenir events');
+
+                $notify_message = $notify_admin;
+
+                //Send email
+                $this->email->message($notify_message);
+                $this->email->send();
+                //EOF Administrator notification sending
 
                 $data = array(
                     'error' => FALSE,

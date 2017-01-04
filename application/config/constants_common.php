@@ -7,7 +7,7 @@
 define("SITE_NAME", "Avenir Event Management");
 define("SITE_URL", "http://www.avenirevents.com/");
 define("SITE_URL2", "www.avenirevents.com");
-define("INFO_EMAIL", "avenirevents.com");
+define("INFO_EMAIL", "info@avenirevents.com");
 define("ADMIN_VERSION", "version 5.0.1");
 define("NO_REPLY", "avenirevents.com");
 

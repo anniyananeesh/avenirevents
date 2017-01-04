@@ -307,7 +307,7 @@ myApp.controller('SignupCtrl',function($scope, $http, $window) {
 
 							<div class="row">
 
-                <div class="col-md-6 <?php echo ($lan == 'ar') ? 'pull-right' : 'pull-left';?>">
+                <div class="col-md-6">
 
 									<h3>Entertainer Details</h3>
 
@@ -359,38 +359,6 @@ myApp.controller('SignupCtrl',function($scope, $http, $window) {
                                   <input type="text" class="form-control" placeholder="Not in the list Please specify" ng-model="user.model_spl_other">
                                 </div>
 
-                                    <div class="form-group">
-                                        <label class="control-label"><?php echo lang("auto.region")?></label> <br>
-
-																				<label class="radio-inline">
-																					<input type="radio"  name="model_region" value="african" ng-checked="user.model_region == 'african'" ng-click="user.model_region = 'african'"> African
-																				</label>
-
-																			<label class="radio-inline">
-																					<input type="radio"  name="model_region" value="arabic" ng-checked="user.model_region == 'arabic'" ng-click="user.model_region = 'arabic'"> <?php echo lang("auto.arabic")?>
-																				</label>
-
-																				<label class="radio-inline">
-																					<input type="radio"  name="model_region" value="asian" ng-checked="user.model_region == 'asian'" ng-click="user.model_region = 'asian'"> Asian
-																				</label>
-
-																				<label class="radio-inline">
-																					<input type="radio"  name="model_region" value="europian" ng-checked="user.model_region == 'europian'" ng-click="user.model_region = 'europian'"> <?php echo lang("auto.european")?> / Caucasian
-																				</label>
-
-																				<label class="radio-inline">
-																					<input type="radio"  name="model_region" value="indian_south_asian" ng-checked="user.model_region == 'indian_south_asian'" ng-click="user.model_region = 'indian_south_asian'"> Indian/South Asian
-																				</label>
-
-																				<label class="radio-inline">
-																					<input type="radio"  name="model_region" value="latino" ng-checked="user.model_region == 'latino'" ng-click="user.model_region = 'latino'"> Latino
-																				</label>
-
-																				<label class="radio-inline">
-																					<input type="radio"  name="model_region" value="meditaranian" ng-checked="user.model_region == 'meditaranian'" ng-click="user.model_region = 'meditaranian'"> <?php echo lang("auto.meditaranian")?>
-																				</label>
-
-                                    </div>
 
                                     <div class="form-group">
                                       <label class="control-label">Gender</label> <br>

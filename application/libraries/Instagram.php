@@ -4,7 +4,7 @@ class Instagram{
 
     public $user_id;
     public $client_id;
-    protected $access_token = '1624352992.207419c.a2a85e48855a48da96ff7cc82515fdd7';
+    protected $access_token = '1376315739.23e2ac7.7d9fa8f94b064c448369d8961c02b16a';
 
     public function __construct( $user_id, $client_id)
     {
@@ -23,7 +23,7 @@ class Instagram{
         return $data;
     }
 
-    public function get_recent_medias($count = 6)
+    public function get_recent_medias($count = 12)
     {
         return $this->get_data("https://api.instagram.com/v1/users/$this->user_id/media/recent/?client_id=$this->client_id&count=$count&access_token=$this->access_token");
     }

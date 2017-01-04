@@ -658,7 +658,7 @@
                         $data_array = array(
                             "parent_id"         =>      mysql_real_escape_string($parent_id),
                             "video_title"       =>      "Video " . $orderN,
-                            "video_url"         =>      $video_url,
+                            "video_url"         =>      $this->getIframeVideoUrl($video_url),
                             "orderby"           =>      mysql_real_escape_string($orderN),
                             "is_active"         =>      mysql_real_escape_string($is_active),
                             "added_date"        =>      date("Y-m-d H:i:s")
@@ -676,12 +676,18 @@
                 }
 
                 if (!isset($data["Error"]) && $_POST["submit"]=="Save & Close"){
-                    redirect(HOST_URL."/".$folder."/a");
+                    //redirect(HOST_URL."/".$folder."/a");
                     exit();
                 }
             } //if(isset($_POST)
 
             $this->load->view($this->config->item("admin_folder")."/template", $data);
+        }
+
+        function getIframeVideoUrl($iframe) {
+
+           $url = preg_match('/src="([^"]+)"/', $iframe, $match);
+           return $match[1];
         }
 /*
 |--------------------------------------------------------------------------

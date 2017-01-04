@@ -52,14 +52,14 @@ class Home extends CI_Controller
         //Get all clients
         $this->load->model('model_clients');
   			$data["data_clients"] = $this->model_clients->get_all_records(array('is_active'=>'Y'), 0, 10000, 'orderby', 'ASC');
-        
+
         //Get all clients
         $this->load->model('model_reviews');
   			$data["data_reviews"] = $this->model_reviews->get_all_records(array('is_active'=>'Y'), 0, 10000, 'orderby', 'ASC');
 
         //Get images from instagram
         require_once APPPATH.'libraries/Instagram.php';
-	      $instagram = new Instagram('1624352992', '207419c0928f4a9a9413b2375312d1d6');
+	      $instagram = new Instagram('1376315739', '23e2ac7c52ab401ca5d5a2a22107504e');
 	      $data['instagram_photos'] = $instagram->get_recent_medias()->data;
 
         $this->load->view("template", $data);

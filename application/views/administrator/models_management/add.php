@@ -15,7 +15,7 @@
 		    	placeholder: 'Choose',
 		     	csvDispCount: 2
 			});
-			
+
 		});
 </script>
 
@@ -116,11 +116,9 @@
 							<option value="Commercial & Print" <?php echo (is_array($model_spl) && in_array("Commercial & Print", $model_spl)) ? 'selected':'';?>>Commercial & Print</option>
 							<option value="Swimwear" <?php echo (is_array($model_spl) && in_array("Swimwear", $model_spl)) ? 'selected':'';?>>Swimwear</option>
 							<option value="Fitness" <?php echo (is_array($model_spl) && in_array("Fitness", $model_spl)) ? 'selected':'';?>>Fitness</option>
-							<option value="Lingerie" <?php echo (is_array($model_spl) && in_array("Lingerie", $model_spl)) ? 'selected':'';?>>Lingerie</option>
-							<option value="Glamour" <?php echo (is_array($model_spl) && in_array("Glamour", $model_spl)) ? 'selected':'';?>>Glamour</option>
+ 							<option value="Glamour" <?php echo (is_array($model_spl) && in_array("Glamour", $model_spl)) ? 'selected':'';?>>Glamour</option>
 							<option value="Alternative" <?php echo (is_array($model_spl) && in_array("Alternative", $model_spl)) ? 'selected':'';?>>Alternative</option>
-							<option value="Nude" <?php echo (is_array($model_spl) && in_array("Nude", $model_spl)) ? 'selected':'';?>>Nude</option>
-							<option value="Hair" <?php echo (is_array($model_spl) && in_array("Hair", $model_spl)) ? 'selected':'';?>>Hair</option>
+ 							<option value="Hair" <?php echo (is_array($model_spl) && in_array("Hair", $model_spl)) ? 'selected':'';?>>Hair</option>
 							<option value="Legs & Feet" <?php echo (is_array($model_spl) && in_array("Legs & Feet", $model_spl)) ? 'selected':'';?>>Legs & Feet</option>
 							<option value="Hands" <?php echo (is_array($model_spl) && in_array("Hands", $model_spl)) ? 'selected':'';?>>Hands</option>
 							<option value="Acting / Commercials" <?php echo (is_array($model_spl) && in_array("Acting / Commercials", $model_spl)) ? 'selected':'';?>>Acting / Commercials</option>

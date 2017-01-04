@@ -324,7 +324,7 @@ myApp.controller('SignupCtrl',function($scope, $http, $window) {
 
 							<div class="row">
 
-                <div class="col-md-6 <?php echo ($lan == 'ar') ? 'pull-right' : 'pull-left';?>">
+                <div class="col-md-6">
 
 									<h3><?php echo lang("auto.model_info")?></h3>
 
@@ -428,11 +428,9 @@ myApp.controller('SignupCtrl',function($scope, $http, $window) {
 									                                    <option value="Spokesmodel">Spokesmodel</option>
 									                                    <option value="Commercial & Print">Commercial & Print</option>
 									                                    <option value="Swimwear">Swimwear</option>
-									                                    <option value="Fitness">Fitness</option>
-									                                    <option value="Lingerie">Lingerie</option>
+									                                    <option value="Fitness">Fitness</option> 
 									                                    <option value="Glamour">Glamour</option>
 									                                    <option value="Alternative">Alternative</option>
-									                                    <option value="Nude">Nude</option>
 									                                    <option value="Hair">Hair</option>
 									                                    <option value="Legs & Feet">Legs & Feet</option>
 									                                    <option value="Hands">Hands</option>

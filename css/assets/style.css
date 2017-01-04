@@ -1209,3 +1209,11 @@ border-radius: 3px;
   0%, 39%, 100% { opacity: 0; }
   40% { opacity: 1; }
 }
+
+select.form-control {
+	 border-radius: 1px!important;
+	 border: #a4a4a4 solid 1px!important;
+   -webkit-appearance: none;
+	 background: url(../../images/assets/icon_arrow_down.png) no-repeat !important;
+	background-position: 99% 7px !important
+}
