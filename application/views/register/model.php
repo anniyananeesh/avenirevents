@@ -134,7 +134,9 @@ myApp.controller('SignupCtrl',function($scope, $http, $window) {
 				headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
 			});
 
-			request.success(function (data) {});
+			request.success(function (data) {
+					uploadObjCV.startUpload();
+			});
 
 		}
 
@@ -170,13 +172,22 @@ myApp.controller('SignupCtrl',function($scope, $http, $window) {
 		    	};
 
 		    var request = $http({
-				method: "post",
-				url: "<?php echo HOST_URL?>/async/model/setCV",
-				data: setParams,
-				headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-			});
+					method: "post",
+					url: "<?php echo HOST_URL?>/async/model/setCV",
+					data: setParams,
+					headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+				});
 
-			request.success(function (data) {});
+			request.success(function (data) {
+
+					//Send notification to admin panel
+					sendAdminNotification(userPk);
+
+					$('#signUpFrmHolder').fadeOut(250,function(){
+						$("#successFrmHolder").fadeIn(250);
+					});
+
+			});
 
 		}
 
@@ -250,21 +261,13 @@ myApp.controller('SignupCtrl',function($scope, $http, $window) {
 					   	$("#userPk").val(data.data.pkey);
 
 					   	uploadObj.startUpload();
-					   	uploadObjCV.startUpload();
-
 					   	$('.loader-spinner').hide();
-
               $scope.user_fullname = data.data.name;
 
-					    $('#signUpFrmHolder').fadeOut(250,function(){
-					   		$("#successFrmHolder").fadeIn(250);
-					   	});
-
-				   }else{
+				   } else {
 
 				   		$('.loader-spinner').hide();
 				   		$window.alert(data.message);
-
 				   }
 
 				});
@@ -283,6 +286,18 @@ myApp.controller('SignupCtrl',function($scope, $http, $window) {
 	};
 
 });
+
+//Send notification to admin user
+function sendAdminNotification(userID) {
+
+		$.post('<?php echo HOST_URL?>/async/model/send_notification', {'user' : userID}, function(res){
+
+				if(res.code == 200) {
+						console.log('Done sending admin notification');
+				}
+
+		}, 'json');
+}
 
 </script>
 
@@ -428,7 +443,7 @@ myApp.controller('SignupCtrl',function($scope, $http, $window) {
 									                                    <option value="Spokesmodel">Spokesmodel</option>
 									                                    <option value="Commercial & Print">Commercial & Print</option>
 									                                    <option value="Swimwear">Swimwear</option>
-									                                    <option value="Fitness">Fitness</option> 
+									                                    <option value="Fitness">Fitness</option>
 									                                    <option value="Glamour">Glamour</option>
 									                                    <option value="Alternative">Alternative</option>
 									                                    <option value="Hair">Hair</option>

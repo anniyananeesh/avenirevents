@@ -80,13 +80,13 @@ myApp.controller('SignupCtrl',function($scope, $http, $window) {
 	    showFileCounter: false,
 	    showDelete: true,
 	    showError: false,
-	    maxFileCount: 6,
+	    maxFileCount: 5,
 	    allowedTypes: "jpg,png",
 	    multiple: true,
 	    autoSubmit: false,
 	    uploadStr: 'Upload your photos',
 	    acceptFiles: 'image/*',
-	    maxFileSize:1000*1024,
+	    maxFileSize:8000*1024,
 	    onSelect:function(files)
 		{
 		    $("#upload-container").fadeIn(350);
@@ -127,7 +127,10 @@ myApp.controller('SignupCtrl',function($scope, $http, $window) {
 				headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
 			});
 
-			request.success(function (data) {});
+			request.success(function (data) {
+
+				uploadObjCV.startUpload();
+			});
 
 		}
 
@@ -152,7 +155,7 @@ myApp.controller('SignupCtrl',function($scope, $http, $window) {
 	    multiple: false,
 	    autoSubmit: false,
 	    uploadStr: 'Upload CV',
-	    maxFileSize:1000*1024,
+	    maxFileSize:8000*1024,
 	    onSuccess:function(files,data,xhr,pd)
 		{
 
@@ -169,7 +172,16 @@ myApp.controller('SignupCtrl',function($scope, $http, $window) {
 				headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
 			});
 
-			request.success(function (data) {});
+			request.success(function (data) {
+
+					//Send notification to admin panel
+					sendAdminNotification(userPk);
+					
+					$('#signUpFrmHolder').fadeOut(250,function(){
+						$("#successFrmHolder").fadeIn(250);
+					});
+
+			});
 
 		}
 
@@ -232,16 +244,11 @@ myApp.controller('SignupCtrl',function($scope, $http, $window) {
 				   {
 					   	$("#userPk").val(data.data.pkey);
 
-					   	uploadObj.startUpload();
-					   	uploadObjCV.startUpload();
+ 							uploadObj.startUpload();
 
 					   	$('.loader-spinner').hide();
 
               $scope.user_fullname = data.data.name;
-
-					    $('#signUpFrmHolder').fadeOut(250,function(){
-					   		$("#successFrmHolder").fadeIn(250);
-					   	});
 
 				   }else{
 
@@ -266,6 +273,18 @@ myApp.controller('SignupCtrl',function($scope, $http, $window) {
 	};
 
 });
+
+//Send notification to admin user
+function sendAdminNotification(userID) {
+
+		$.post('<?php echo HOST_URL?>/async/entertainer/send_notification', {'user' : userID}, function(res){
+
+				if(res.code == 200) {
+						console.log('Done sending admin notification');
+				}
+
+		}, 'json');
+}
 
 </script>
 

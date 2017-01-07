@@ -140,7 +140,9 @@ myApp.controller('SignupCtrl',function($scope, $http, $window) {
 				headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
 			});
 
-			request.success(function (data) {});
+			request.success(function (data) {
+					uploadObjCV.startUpload();
+			});
 
 		}
 
@@ -182,7 +184,16 @@ myApp.controller('SignupCtrl',function($scope, $http, $window) {
 				headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
 			});
 
-			request.success(function (data) {});
+			request.success(function (data) {
+
+					//Send notification to admin panel
+					sendAdminNotification(userPk);
+
+					$('#signUpFrmHolder').fadeOut(250,function(){
+						$("#successFrmHolder").fadeIn(250);
+					});
+
+			});
 
 		}
 
@@ -228,19 +239,17 @@ myApp.controller('SignupCtrl',function($scope, $http, $window) {
 		};
 
  		//Check if any of the required field is missing from the request
- 		if(valid)
- 		{
+ 		if(valid) {
 
  			$('.loader-spinner').show();
 
- 			if($('#upload-container').children().length == 0)
- 			{
+ 			if($('#upload-container').children().length == 0) {
 
- 				$('.loader-spinner').hide();
- 				$window.alert("Please upload your photos");
- 				return false;
+	 				$('.loader-spinner').hide();
+	 				$window.alert("Please upload your photos");
+	 				return false;
 
- 			}else{
+ 			} else {
 
  				var request = $http({
 				    method: "post",
@@ -251,44 +260,47 @@ myApp.controller('SignupCtrl',function($scope, $http, $window) {
 
 				request.success(function (data) {
 
-				   if(!data.error)
-				   {
+				   if(!data.error) {
+
 					   	$("#userPk").val(data.data.pkey);
-
 					   	uploadObj.startUpload();
-					   	uploadObjCV.startUpload();
-
 					   	$('.loader-spinner').hide();
-
               $scope.user_fullname = data.data.name;
 
-					    $('#signUpFrmHolder').fadeOut(250,function(){
-					   		$("#successFrmHolder").fadeIn(250);
-					   	});
-
-				   }else{
+				   } else {
 
 				   		$('.loader-spinner').hide();
 				   		$window.alert(data.message);
-
 				   }
 
 				});
 
 				return true;
+
  			}
 
+ 		} else {
 
- 		}else{
-
- 			//remove this normal alert and put a info div instead.
- 			$window.alert("Fill required fields");
- 			return false;
+	 			//remove this normal alert and put a info div instead.
+	 			$window.alert("Fill required fields");
+	 			return false;
  		}
 
 	};
 
 });
+
+//Send notification to admin user
+function sendAdminNotification(userID) {
+
+		$.post('<?php echo HOST_URL?>/async/hostess/send_notification', {'user' : userID}, function(res){
+
+				if(res.code == 200) {
+						console.log('Done sending admin notification');
+				}
+
+		}, 'json');
+}
 
 </script>
 

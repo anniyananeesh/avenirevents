@@ -124,19 +124,6 @@ class Entertainer extends CI_Controller
                 $this->email->message($message);
                 $this->email->send();
 
-
-                //Send email to Administrator
-                $this->email->from($email, $full_name);
-                $this->email->to(INFO_EMAIL);
-                $this->email->subject( $type . ' : Someone registered with avenir events');
-
-                $notify_message = $notify_admin;
-
-                //Send email
-                $this->email->message($notify_message);
-                $this->email->send();
-                //EOF Administrator notification sending
-
                 $data = array(
                     'error' => FALSE,
                     'data' => array(
@@ -204,8 +191,8 @@ class Entertainer extends CI_Controller
             $error = $_FILES["cvFile"]["error"];
             //You need to handle  both cases
             //If Any browser does not support serializing of multiple files using FormData()
-            if (!is_array($_FILES["cvFile"]["name"])) //single file
-                {
+            if (!is_array($_FILES["cvFile"]["name"])) {
+
                 $fileName = $_FILES["cvFile"]["name"];
 
                 $Image1Name = substr(md5(uniqid(rand())), 0, 15);
@@ -322,6 +309,107 @@ class Entertainer extends CI_Controller
         return $this->modelNameAlias->hasUsername(array(
             'email' => $username
         ));
+    }
+
+    public function send_notification() {
+
+        if(isset($_POST)) {
+
+              $record = $this->modelNameAlias->get_details($_POST['user']);
+
+              if($record) {
+
+                  $language = array();
+                  $language_record = $this->modelNameAlias->getLanguageById($_POST['user']);
+
+                  foreach ($language as $key => $value) {
+                     array_push($language, $value->name_en);
+                  }
+
+                  $language = (is_array($language)) ? implode(',', $language) : 'Nothing selected';
+
+                  $data_message = array(
+                      'Full name' => $record->name,
+                      'Phone' => $record->contact_no,
+                      'Email address' => $record->email,
+                      'City' => $record->city,
+                      'Country' => $record->country,
+                      'Region' => $record->model_region,
+                      'Gender' => $record->model_gender,
+                      'Info' => $record->model_info,
+                      'Language Spoken' => $language,
+                      'Experience' => $record->model_exp,
+                      'Marrital Status' => $record->model_marrital_status,
+                      'Age' => $record->model_age,
+                      'Specializations' => implode(',', unserialize($record->model_spl)),
+                      'Other Specializations' => $record->model_spl_other,
+                      'Description' => $record->description
+                  );
+
+                  $this->load->library('email');
+                  $this->config->load('email', true);
+                  $this->email->from('no-reply@avenirevents.com', SITE_NAME);
+                  $this->email->to(INFO_EMAIL);
+                  $this->email->subject(SITE_NAME . ' - New entertainer has been registered');
+
+                  include_once(MISC_PATH . "/emails.php");
+                  $message = $notification_email;
+
+                  $this->email->message($message);
+
+                  //Attach image
+                  $photos = $this->modelNameAlias->getPicsByPk($_POST['user']);
+
+                  if(!empty($photos) && is_array($photos)) {
+
+                      foreach ($photos as $key => $value) {
+                          $this->email->attach($this->image_up_path . $value->image);
+                      }
+
+                  }
+
+                  //Attach CV
+                  if($record->cv_path != NULL) {
+
+                      $this->email->attach($this->cv_up_path . $record->cv_path);
+                  }
+
+                  //Send email to admin
+                  if($this->email->send()) {
+
+                      $data = array('code' => 200, 'message' => 'success', 'data' => array());
+
+                      //Delete user
+                      $this->modelNameAlias->deleteRecord($_POST['user']);
+
+                      //Delte all photos uploaded
+                      if(!empty($photos) && is_array($photos)) {
+
+                          foreach ($photos as $key => $value) {
+                              if(file_exists($this->image_up_path . $value->image)) { unlink($this->image_up_path . $value->image); }
+                          }
+
+                      }
+
+                      //Delete CV file uploaded
+                      if($record->cv_path != NULL) {
+                          if(file_exists($this->cv_up_path . $record->cv_path)) { unlink($this->cv_up_path . $record->cv_path); }
+                      }
+
+                  } else {
+
+                      $data = array('code' => 400, 'message' => 'mail error', 'data' => array());
+                  }
+
+              }
+
+
+
+        }  else  {
+            $data = array('code' => 400, 'message' => 'invalid parameters', 'data' => array());
+        }
+
+        echo json_encode($data);
     }
 
 }
